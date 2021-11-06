@@ -19,7 +19,7 @@ const linkStyle = {
 const AuthForm: React.FC<Auth> = ({ title,  path, pathName, children }) => {
 
   return (
-    <Card sx={{ maxWidth: 500, width: '100%', padding: '15px', bgcolor: 'primary.light' }}>
+    <Card sx={{ maxWidth: 500, width: '100%', padding: '15px' }}>
       <Typography align='center' component='p' variant='h4'>
         { title }
       </Typography>

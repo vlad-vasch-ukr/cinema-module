@@ -1,42 +1,47 @@
-import { indigo, grey,  } from '@mui/material/colors';
+import { ThemeOptions } from '@mui/material';
 
-
-// declare module '@mui/material' {
-//   interface ThemeOptions {    
-//     themeName?: string,
-//     mode?: string
-//   }
-// }
-
-export const lightTheme = {
+export const lightTheme: ThemeOptions = {
   palette: {
-    background: {
-      default: '#c4c4c4',
-    },
+    mode: 'light',
     primary: {
-      main: indigo[500],
-      ligth: '#fff',
-      dark: indigo[700],
+      main: '#05074e',
+      light: '#24368e',
+      dark: '#040527',
     },
     secondary: {
-      main: '#f30000'
-    }
+      main: '#e0181d',
+    },
+    background: {
+      default: '#d2d2d2',
+      paper: '#fafafa',
+    },
+    error: {
+      main: '#ff1200',
+    },
+    divider: 'rgba(49,46,46,0.12)',
+    info: {
+      main: '#227dc5',
+    },
   },
 };
 
-export const darkTheme = {
+export const darkTheme: ThemeOptions = {
   palette: {
-    background: {
-      default: '#121212'
-    },
+    mode: 'dark',
     primary: {
-      main: grey[800],
-      ligth: grey[300],
-      contrastText: '#f3000'
+      main: '#626369',
+      light: '#86878c',
     },
-    text: {
-      // primary: '#fff',
-      secondary: '#fff'
+    secondary: {
+      main: '#b32454',
     },
+    background: {
+      default: '#181717',
+      paper: '#2d2b2b',
+    },
+    error: {
+      main: '#bd2a1f',
+    },
+    divider: 'rgba(49,46,46,0.12)',
   },
-}
+};
