@@ -2,10 +2,12 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import MoviesReducer from './reducers/MoviesSlice';
 import { combineReducers } from 'redux';
 import { moviApi } from '../services/MoviesService';
+import { themeReducer } from './reducers/Theme';
 
 const rootReducer = combineReducers({
   MoviesReducer,
-  [moviApi.reducerPath]: moviApi.reducer
+  [moviApi.reducerPath]: moviApi.reducer,
+  themeReducer
 })
 
 export const store = configureStore({
