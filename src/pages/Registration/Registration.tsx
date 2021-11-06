@@ -1,32 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import { Container, TextField, Box, Button, MenuItem } from "@mui/material";
+import { Container } from "@mui/material";
 import * as Yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { isAfter, isBefore } from "date-fns";
-import FieldError from "../../components/FieldError/FieldError";
 import './Registration.scss';
 
-export interface Form {
-  firstName: string,
-  lastName: string,
-  sex: string,
-  email: string,
-  password: string,
-  confirmPassword: string,
-  userName: string
-}
-
-export interface Field {
-  type: string,
-  name: string,
-  label: string
-}
-
 const Registration: React.FC = () => {
-
-  const [select, setSelect] = useState<string>('')
 
   const rules = Yup.object().shape({
     firstName: Yup.string().required('Field is required'),
@@ -50,14 +29,13 @@ const Registration: React.FC = () => {
       return false;
     })
   })
-  
-  const {register, handleSubmit, getValues, formState: {errors}} = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(rules)
-  });
+
+  const submitForm = (form: any):void => {
+    console.log(form)
+  }
   
 
-  const fieldsTemplate:Field[] = [
+  const fieldsTemplate = [
     { type: 'text', name: 'firstName', label: 'First name*' },
     { type: 'text', name: 'lastName', label: 'Last name*' },
     { type: 'text', name: 'userName', label: 'User name*' },
@@ -72,52 +50,15 @@ const Registration: React.FC = () => {
     <div className="registration-view">
       <Container maxWidth='lg'>
         <div className="registration-view__wrap">
-          <AuthForm title='Registration' path='sign-up' pathName='I am registered'>
-            <form noValidate onSubmit={ handleSubmit( () => console.log(getValues()) ) }>
-              {
-                fieldsTemplate.map(field => {
-                  if(field.type !== 'select') {
-                    return (<Box component='div' mb={2} key={field.name}>
-                              <TextField
-                                type={field.type}
-                                {...register(field.name as any)}
-                                error={ !!errors[field.name]?.message }
-                                label={field.label}
-                                fullWidth
-                              />
-                              <FieldError message={ errors[field.name]?.message } />
-                            </Box>)
-                  } else {
-                    return (
-                      <Box component='div' mb={2} key={field.name}>
-                        <TextField
-                          {...register(field.name as any)}
-                          variant='outlined'
-                          label={field.label}
-                          error={ !select && !!errors[field.name]?.message }
-                          value={select}
-                          select
-                          fullWidth
-                          onChange={(e) => setSelect(e.target.value)}
-                        >
-                          <MenuItem value='male'>Male</MenuItem>
-                          <MenuItem value='female' selected>Female</MenuItem>
-                        </TextField>
-                        <FieldError message={ !select && errors[field.name]?.message } />
-                      </Box>
-                    )
-                  }
-                })
-              }
-              <Button
-                type='submit'
-                variant='contained'
-                size='large'
-              >
-                registration
-              </Button>
-            </form>
-          </AuthForm>
+          <AuthForm
+            rules={rules}
+            fieldsTemplate={fieldsTemplate}
+            title='Registration'
+            path='/sign-up'
+            pathName='I am registered'
+            handler={submitForm}
+            submitBtn='registration'
+          />
         </div>
       </Container>
     </div>
