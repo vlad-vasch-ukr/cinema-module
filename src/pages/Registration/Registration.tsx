@@ -62,6 +62,7 @@ const Registration: React.FC = () => {
     { type: 'text', name: 'lastName', label: 'Last name*' },
     { type: 'text', name: 'userName', label: 'User name*' },
     { type: 'email', name: 'email', label: 'Email*' },
+    { type: 'date', name: 'dateOfBirth', label: '' },
     { type: 'select', name: 'sex', label: 'Sex*' },
     { type: 'password', name: 'password', label: 'Password*' },
     { type: 'password', name: 'confirmPassword', label: 'Confirm password*' },
@@ -72,7 +73,7 @@ const Registration: React.FC = () => {
       <Container maxWidth='lg'>
         <div className="registration-view__wrap">
           <AuthForm title='Registration' path='sign-up' pathName='I am registered'>
-            <form noValidate onSubmit={ handleSubmit( () => {} ) }>
+            <form noValidate onSubmit={ handleSubmit( () => console.log(getValues()) ) }>
               {
                 fieldsTemplate.map(field => {
                   if(field.type !== 'select') {
@@ -93,7 +94,7 @@ const Registration: React.FC = () => {
                           {...register(field.name as any)}
                           variant='outlined'
                           label={field.label}
-                          error={ !!errors[field.name]?.message }
+                          error={ !select && !!errors[field.name]?.message }
                           value={select}
                           select
                           fullWidth
@@ -102,7 +103,7 @@ const Registration: React.FC = () => {
                           <MenuItem value='male'>Male</MenuItem>
                           <MenuItem value='female' selected>Female</MenuItem>
                         </TextField>
-                        <FieldError message={ errors[field.name]?.message } />
+                        <FieldError message={ !select && errors[field.name]?.message } />
                       </Box>
                     )
                   }
@@ -112,7 +113,6 @@ const Registration: React.FC = () => {
                 type='submit'
                 variant='contained'
                 size='large'
-                onClick={() => console.log(getValues())}
               >
                 registration
               </Button>

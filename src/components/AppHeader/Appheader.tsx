@@ -2,8 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, IconButton, Box, Button, InputBase } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { useHistory } from "react-router";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled, alpha } from '@mui/material/styles';
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 
@@ -47,7 +46,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const AppHeader: React.FC = () => {
-  const history = useHistory();
 
   return (
     <AppBar position="static" sx={{ bgcolor: 'primary.dark' }}>
@@ -61,6 +59,9 @@ const AppHeader: React.FC = () => {
           >
             <MenuIcon />
           </IconButton> */}
+          <Box className='app-logo'>
+            <Link to='/'>cinema</Link>
+          </Box>
           <Box>
             <ThemeSwitch />
           </Box>
@@ -73,10 +74,10 @@ const AppHeader: React.FC = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Box>
+          {/* <Box>
             <NavLink to="/registration" activeStyle={{ color: 'red' }} >Registration</NavLink>
             <NavLink to="/sign-up" activeStyle={{ color: 'red' }} >Sign</NavLink>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
   )

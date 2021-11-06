@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/Routes';
 import MainLayout from './containers/MainLayout';
 import Theme from './components/Theme/Theme';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (

@@ -5,12 +5,14 @@ import { CSSTransition } from "react-transition-group";
 import Home from '../pages/Home/Home';
 import Movie from '../pages/Movie/Movie';
 import Registration from '../pages/Registration/Registration';
+import SignUp from '../pages/SignUp/SignUp';
 import './Routes.scss';
 
 const routes = [
   { path: '/', name: 'Home', Component: Home },
   { path: '/movie/:id', name: 'Movie', Component: Movie },
   { path: '/registration', name: 'Registration', Component: Registration },
+  { path: '/sign-up', name: 'SignUp', Component: SignUp },
 ]
 
 
