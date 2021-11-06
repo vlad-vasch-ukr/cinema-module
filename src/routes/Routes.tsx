@@ -2,9 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { useRef } from 'react';
 import { CSSTransition } from "react-transition-group";
-import Home from './pages/Home/Home';
-import Movie from './pages/Movie/Movie';
-import Registration from './pages/Registration/Registration';
+import Home from '../pages/Home/Home';
+import Movie from '../pages/Movie/Movie';
+import Registration from '../pages/Registration/Registration';
+import './Routes.scss';
 
 const routes = [
   { path: '/', name: 'Home', Component: Home },
