@@ -73,10 +73,10 @@ const AppHeader: React.FC = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <NavLink to="/registration" activeStyle={{ color: 'red' }} >Registration</NavLink>
-          <Button color="inherit" onClick={() => history.push('/login')}>
-            Login
-          </Button>
+          <Box>
+            <NavLink to="/registration" activeStyle={{ color: 'red' }} >Registration</NavLink>
+            <NavLink to="/sign-up" activeStyle={{ color: 'red' }} >Sign</NavLink>
+          </Box>
         </Toolbar>
       </AppBar>
   )
