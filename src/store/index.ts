@@ -1,13 +1,18 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import MoviesReducer from './reducers/MoviesSlice';
 import { combineReducers } from 'redux';
+import { moviApi } from '../services/MoviesService';
 
 const rootReducer = combineReducers({
-  MoviesReducer
+  MoviesReducer,
+  [moviApi.reducerPath]: moviApi.reducer
 })
 
 export const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(moviApi.middleware)
+  }
 });
 
 export type AppDispatch = typeof store.dispatch;

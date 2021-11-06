@@ -1,0 +1,10 @@
+.registration-view {
+  background-color: #c4c4c4;
+  
+  &__wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
