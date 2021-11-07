@@ -8,6 +8,11 @@ interface Movies {
   total_pages: number
 }
 
+interface Genres {
+  id: number,
+  name: string
+}
+
 interface SearchParams {
   language:string 
   page:number
@@ -28,8 +33,16 @@ export const moviApi = createApi({
           api_key: process.env.REACT_APP_API_KEY
         }
       })
-    })
+    }),
+    fetchMovieCategories: build.query<Genres[], string>({
+      query: () => ({
+        url: '/genre/movie/list',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        }
+      })
+    }),
   })
 })
 
-export const { useFetchMoviesQuery } = moviApi
+export const { useFetchMoviesQuery, useFetchMovieCategoriesQuery } = moviApi

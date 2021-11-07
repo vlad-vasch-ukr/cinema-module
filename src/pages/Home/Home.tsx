@@ -1,4 +1,4 @@
-import { useFetchMoviesQuery } from "../../services/MoviesService";
+import { useFetchMoviesQuery, useFetchMovieCategoriesQuery } from "../../services/MoviesService";
 import { Container, Box } from "@mui/material";
 import MoviesContainer from "../../containers/MoviesContainer";
 import { useState } from "react";
@@ -16,6 +16,7 @@ export default function Home() {
     sort_by: 'popularity.desc'
   })
   const {data: results} = useFetchMoviesQuery(sortParams);
+  const {data: genres} = useFetchMovieCategoriesQuery('');
   
 
   return (
