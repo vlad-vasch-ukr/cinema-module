@@ -1,9 +1,8 @@
 import React from "react";
-import { Container, Box } from "@mui/material";
+import { Container } from "@mui/material";
 import * as Yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import AuthForm from "../../components/AuthForm/AuthForm";
+import './SignUp.scss';
 
 export interface Field {
   type: string,
@@ -15,21 +14,21 @@ const SignUp: React.FC = () => {
   const fieldsTemplate:Field[] = [
     { type: 'email', name: 'email', label: 'Email*' },
     { type: 'password', name: 'password', label: 'Password*' },
-  ]
+  ];
 
   const rules = Yup.object().shape({
     email: Yup.string().required('Field is required').email('Email must be correct'),
     password: Yup.string().required('Field is required').min(8, 'Minimum length 8')
-  })
+  });
 
   const submitForm = (form: any):void => {
     console.log(form)
-  }
+  };
 
   return (
     <div className="signup-view">
       <Container maxWidth='lg'>
-        <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className='signup-view__wrap'>
           <AuthForm
             rules={rules}
             fieldsTemplate={fieldsTemplate}
@@ -39,7 +38,7 @@ const SignUp: React.FC = () => {
             handler={submitForm}
             submitBtn='sign up'
           />
-        </Box>
+        </div>
       </Container>
     </div>
   )

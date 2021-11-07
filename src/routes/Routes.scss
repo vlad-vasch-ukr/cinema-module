@@ -1,23 +1,24 @@
 .page {
   transition: opacity 300ms ease-in;
+  //opacity: 0;
 }
 
 .page-enter {
-  //opacity: 1;
-  transition: opacity 300ms ease-in;
+  opacity: 1;
+  //transition: opacity 300ms ease-in;
 }
 
 .page-enter-active {
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  //transition: opacity 300ms ease-in;
 }
 
 .page-exit {
   opacity: 0;
-  transition: opacity 300ms ease-in;
+  //transition: opacity 300ms ease-in;
 }
 
 .page-exit-active {
   opacity: 0;
-  transition: opacity 300ms ease-in;
+  //transition: opacity 300ms ease-in;
 }

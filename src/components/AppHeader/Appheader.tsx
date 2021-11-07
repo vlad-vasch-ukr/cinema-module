@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Box, Button, InputBase } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Box, Button, InputBase, Container } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from "react-router-dom";
@@ -49,6 +49,7 @@ const AppHeader: React.FC = () => {
 
   return (
     <AppBar position="static" sx={{ bgcolor: 'primary.dark' }}>
+      <Container>
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -79,7 +80,8 @@ const AppHeader: React.FC = () => {
             <NavLink to="/sign-up" activeStyle={{ color: 'red' }} >Sign</NavLink>
           </Box> */}
         </Toolbar>
-      </AppBar>
+      </Container>
+    </AppBar>
   )
 }
 
