@@ -21,9 +21,9 @@ export default function Home() {
   return (
     <div className="home-view">
       <Container maxWidth='lg'>
-        <Box display='grid' gap={2} gridTemplateColumns="repeat(12, 1fr)">
-          <Box gridColumn="span 4"></Box>
-          <Box gridColumn="span 8">
+        <Box display='grid' gap={3} gridTemplateColumns="repeat(12, 1fr)">
+          <Box gridColumn="span 3"></Box>
+          <Box gridColumn="span 9">
             <MoviesContainer items={results?.results} />
           </Box>
         </Box>
