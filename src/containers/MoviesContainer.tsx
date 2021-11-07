@@ -9,9 +9,15 @@ interface Items {
 
 const MoviesContainer: React.FC<Items> = ({ items }) => {
   return (
-    <Grid item md={3}>
+    <Grid container spacing={2}>
       {
-        items && items.map(item => <MovieCard item={item} key={item.id} />)
+        items && items.map(item => {
+          return (
+            <Grid item xs={6} sm={4} md={4} key={item.id}>
+              <MovieCard item={item} />
+            </Grid>
+          )
+        })
       }
     </Grid>
   )
