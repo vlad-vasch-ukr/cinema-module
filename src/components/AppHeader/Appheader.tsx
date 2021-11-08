@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Link } from "react-router-dom";
 import { styled, alpha } from '@mui/material/styles';
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import LangSelect from "../LangSelect/LangSelect";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -79,6 +80,7 @@ const AppHeader: React.FC = () => {
             <NavLink to="/registration" activeStyle={{ color: 'red' }} >Registration</NavLink>
             <NavLink to="/sign-up" activeStyle={{ color: 'red' }} >Sign</NavLink>
           </Box> */}
+          <LangSelect />
         </Toolbar>
       </Container>
     </AppBar>

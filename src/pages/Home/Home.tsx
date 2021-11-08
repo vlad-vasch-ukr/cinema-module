@@ -17,7 +17,6 @@ export default function Home() {
   })
   const {data: results} = useFetchMoviesQuery(sortParams);
   const {data: genres} = useFetchMovieCategoriesQuery('');
-  
 
   return (
     <div className="home-view">

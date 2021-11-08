@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/Routes';
 import MainLayout from './layouts/MainLayout';
 import Theme from './components/Theme/Theme';
+import './plugins/i18n';
 import './App.scss';
 
 function App() {
