@@ -2,6 +2,7 @@ import { useFetchMoviesQuery, useFetchMovieCategoriesQuery } from "../../service
 import { Container, Box } from "@mui/material";
 import MoviesContainer from "../../containers/MoviesContainer";
 import { useState } from "react";
+import CPagination from '../../components/CPagination/CPagination';
 
 interface SearchParams {
   language:string 
@@ -17,6 +18,12 @@ export default function Home() {
   })
   const {data: results} = useFetchMoviesQuery(sortParams);
   const {data: genres} = useFetchMovieCategoriesQuery('');
+  const changePage = (page:number):void => {
+    setSortParams({
+      ...sortParams,
+      page: page
+    })
+  }
 
   return (
     <div className="home-view">
@@ -25,6 +32,11 @@ export default function Home() {
           <Box gridColumn="span 3"></Box>
           <Box gridColumn="span 9">
             <MoviesContainer items={results?.results} />
+            <CPagination
+              pageCount={results?.total_pages}
+              defaultPage={1}
+              handler={changePage}
+            />
           </Box>
         </Box>
       </Container>
