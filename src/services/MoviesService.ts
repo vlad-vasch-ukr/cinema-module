@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IMovie } from '../modules';
+import { IMovie, IGenre, ILang } from '../modules';
 
 interface Movies {
   page: number,
@@ -8,15 +8,14 @@ interface Movies {
   total_pages: number
 }
 
-interface Genres {
-  id: number,
-  name: string
-}
-
 interface SearchParams {
   language:string 
   page:number
   sort_by:string
+}
+
+interface Genres {
+  genres: IGenre[]
 }
 
 export const moviApi = createApi({
@@ -34,7 +33,7 @@ export const moviApi = createApi({
         }
       })
     }),
-    fetchMovieCategories: build.query<Genres[], string>({
+    fetchMovieCategories: build.query<Genres, string>({
       query: () => ({
         url: '/genre/movie/list',
         params: {
@@ -42,7 +41,15 @@ export const moviApi = createApi({
         }
       })
     }),
+    fetchLanguages: build.query<ILang[], string>({
+      query: () => ({
+        url: '/configuration/languages',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        }
+      })
+    })
   })
 })
 
-export const { useFetchMoviesQuery, useFetchMovieCategoriesQuery } = moviApi
+export const { useFetchMoviesQuery, useFetchMovieCategoriesQuery, useFetchLanguagesQuery } = moviApi

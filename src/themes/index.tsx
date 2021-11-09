@@ -18,7 +18,7 @@ export const lightTheme: ThemeOptions = {
     error: {
       main: '#ff1200',
     },
-    divider: 'rgba(49,46,46,0.12)',
+    divider: 'rgba(49,46,46,0.3)',
     info: {
       main: '#227dc5',
     },
@@ -42,6 +42,6 @@ export const darkTheme: ThemeOptions = {
     error: {
       main: '#bd2a1f',
     },
-    divider: 'rgba(49,46,46,0.12)',
+    divider: '#fafafa',
   },
 };
