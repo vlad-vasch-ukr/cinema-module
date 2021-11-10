@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, List, Collapse, ListItem, TextField, MenuItem } from '@mui/material';
+import { Box, List, Collapse, ListItem, TextField, MenuItem, Button } from '@mui/material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { useState } from 'react';
 import { IGenre, ILang } from '../../modules';
@@ -7,33 +7,34 @@ import './SortMovies.scss';
 
 interface SortParams {
   genres: IGenre[] | undefined,
-  languages: ILang[] | undefined
+  languages: ILang[] | undefined,
+  handler: any
 }
 
 interface Filters {
-  without_genres: Array<number>,
+  with_genres: Array<number>,
   language: string
 }
 
-const SortMovies: React.FC<SortParams> = ({ genres, languages }) => {
+const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
   const [openFilters, setOpenFilters] = useState<boolean>(true);
   const [filters, setFilters] = useState<Filters>({
-    without_genres: [],
+    with_genres: [],
     language: ''
   });
 
   const toggleGanre = (id:number):void => {
-    const selected:boolean = filters.without_genres.includes(id);
+    const selected:boolean = filters.with_genres.includes(id);
 
     if (selected) {
       setFilters({
         ...filters,
-        without_genres: filters.without_genres.filter(genreId => genreId !== id)
+        with_genres: filters.with_genres.filter(genreId => genreId !== id)
       })
     } else {
       setFilters({
         ...filters,
-        without_genres: [...filters.without_genres, id]
+        with_genres: [...filters.with_genres, id]
       })
     }
   }
@@ -67,19 +68,17 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages }) => {
           unmountOnExit
         >
           <List component="ul" disablePadding>
-            <ListItem sx={{ flexDirection: 'column' }}>
-              <Box>
-                Language
-              </Box>
+            <ListItem sx={{ flexDirection: 'column', borderTop: '1px solid', borderColor: 'divider' }}>
               <Box sx={{width: '100%'}}>
                 <TextField
                   variant='outlined'
                   value={filters.language}
                   select
                   fullWidth
+                  label='Select language'
                   onChange={(e) => setFilters({...filters, language: e.target.value})}
                 >
-                  <MenuItem value='' selected>None Selected</MenuItem>
+                  { !languages && <MenuItem value='' disabled>None</MenuItem> }
                   {
                     languages && languages.map(lang => <MenuItem value={lang?.iso_639_1} key={lang?.iso_639_1}>{lang?.english_name}</MenuItem>)
                   }
@@ -93,7 +92,7 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages }) => {
               <Box sx={{ display: 'flex', flexWrap: 'wrap', padding: '15px' }}>
                 {
                   genres && genres.map(item => {
-                    const selected = filters.without_genres.includes(item.id);
+                    const selected = filters.with_genres.includes(item.id);
 
                     return(
                       <Box
@@ -122,6 +121,9 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages }) => {
               </Box>
             </ListItem>
           </List>
+          <Button onClick={handler.bind(null, filters)} variant='contained' size='large'>
+            Search
+          </Button>
         </Collapse>
       </Box>
     </Box>
