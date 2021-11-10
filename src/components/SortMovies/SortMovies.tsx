@@ -121,7 +121,13 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
               </Box>
             </ListItem>
           </List>
-          <Button onClick={handler.bind(null, filters)} variant='contained' size='large'>
+          <Button
+            onClick={handler.bind(null, filters)}
+            variant='contained'
+            size='large'
+            sx={{ backgroundColor: '#00e7ff', marginBottom: '15px', '&:hover': {backgroundColor: '#006671'} }}
+            disabled={!(filters.with_genres.length || filters.language)}
+          >
             Search
           </Button>
         </Collapse>

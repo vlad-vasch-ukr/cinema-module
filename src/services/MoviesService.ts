@@ -48,8 +48,16 @@ export const moviApi = createApi({
           api_key: process.env.REACT_APP_API_KEY
         }
       })
+    }),
+    fetchCurrentMovie: build.query({
+      query: (id:string) => ({
+        url: `/movie/${id}`,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        }
+      })
     })
   })
 })
 
-export const { useFetchMoviesQuery, useFetchMovieCategoriesQuery, useFetchLanguagesQuery } = moviApi
+export const { useFetchMoviesQuery, useFetchMovieCategoriesQuery, useFetchLanguagesQuery, useFetchCurrentMovieQuery } = moviApi

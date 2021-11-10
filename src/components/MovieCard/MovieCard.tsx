@@ -2,17 +2,22 @@ import React from "react";
 import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, CircularProgress, Box } from "@mui/material";
 import { FavoriteBorder } from "@mui/icons-material";
 import { IMovie } from '../../modules';
+import { useHistory } from 'react-router';
 
 interface IMovieCard {
-  item: IMovie,
-  handler?: any
+  item: IMovie
 }
 
-const MovieCard: React.FC<IMovieCard> = ({ item, handler = () => {} }) => {
+const MovieCard: React.FC<IMovieCard> = ({ item }) => {
   const raitingColor = item.vote_average < 4 && 'error' || item.vote_average < 7 && item.vote_average >= 4 && 'warning' || 'success';
+  const history = useHistory();
+
+  const goToMovie = (id:number):void => {
+    history.push(`/movie/${id}`)
+  }
 
   return (
-    <Card sx={{ height: '100%', position: 'relative' }} onClick={handler}>
+    <Card sx={{ height: '100%', position: 'relative' }} onClick={ goToMovie.bind(null, item.id) }>
       <CardActionArea sx={{ height: '100%' }}>
         <CardMedia
           component="img"
