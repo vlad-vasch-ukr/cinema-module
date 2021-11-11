@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IMovie, IGenre, ILang, ICurrMovie } from '../modules';
+import { IMovie, IGenre, ILang, ICurrMovie, IRecommendation } from '../modules';
 
 interface Movies {
   page: number,
@@ -16,6 +16,13 @@ interface SearchParams {
 
 interface Genres {
   genres: IGenre[]
+}
+
+interface Recommendations {
+  page: number
+  results: IRecommendation[]
+  total_pages: number
+  total_results: number
 }
 
 export const moviApi = createApi({
@@ -56,8 +63,22 @@ export const moviApi = createApi({
           api_key: process.env.REACT_APP_API_KEY
         }
       })
+    }),
+    fetchRecommendations: build.query<Recommendations, string>({
+      query: (id:string) => ({
+        url: `/movie/${id}/recommendations`,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        }
+      })
     })
   })
 })
 
-export const { useFetchMoviesQuery, useFetchMovieCategoriesQuery, useFetchLanguagesQuery, useFetchCurrentMovieQuery } = moviApi
+export const { 
+  useFetchMoviesQuery, 
+  useFetchMovieCategoriesQuery, 
+  useFetchLanguagesQuery, 
+  useFetchCurrentMovieQuery, 
+  useFetchRecommendationsQuery 
+} = moviApi

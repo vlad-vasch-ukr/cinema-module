@@ -23,7 +23,7 @@ export default function Routes() {
     <>
       {routes.map(({ path, Component }) => (
         <Route key={path} exact path={path}>
-          {({ match }) => (
+          {/* {({ match }) => (
           <CSSTransition
             in={match != null}
             timeout={300}
@@ -35,7 +35,8 @@ export default function Routes() {
               <Component />
             </div>
           </CSSTransition>
-          )}
+          )} */}
+          <Component />
         </Route>
       ))}
     </>
