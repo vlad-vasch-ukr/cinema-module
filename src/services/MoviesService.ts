@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IMovie, IGenre, ILang } from '../modules';
+import { IMovie, IGenre, ILang, ICurrMovie } from '../modules';
 
 interface Movies {
   page: number,
@@ -49,7 +49,7 @@ export const moviApi = createApi({
         }
       })
     }),
-    fetchCurrentMovie: build.query({
+    fetchCurrentMovie: build.query<ICurrMovie, string>({
       query: (id:string) => ({
         url: `/movie/${id}`,
         params: {
