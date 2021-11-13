@@ -48,41 +48,47 @@ const AboutMovie:React.FC<Props> = ({ movie, keyWords }) => {
           { getOriginalLang() || '-' }
         </Typography>
       </Box>
-      <Box mt={2}>
-        <Typography component='p' sx={{ fontWeight: 600 }}>
-          Budget
-        </Typography>
-        <Typography component='p'>
-          { formatPrice(movie?.budget) }
-        </Typography>
-      </Box>
-      <Box mt={2}>
-        <Typography component='p' sx={{ fontWeight: 600 }}>
-          Revenue
-        </Typography>
-        <Typography component='p'>
-          { formatPrice(movie?.revenue) }
-        </Typography>
-      </Box>
-      <Box mt={2}>
-        <Typography component='p' variant='h6' sx={{ fontWeight: 600 }}>
-          Keywords
-        </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px' }}>
-          {
-            keyWords && keyWords.map(word => {
-              return (
-                <Box
-                  sx={{ padding: '0 10px', border: '1px solid', bgcolor: 'background.paper', margin: '0 10px 10px 0' }}
-                  key={word.id}
-                >
-                  { word.name}
-                </Box>
-              )
-            })
-          }
+      {
+        !!movie?.budget && <Box mt={2}>
+          <Typography component='p' sx={{ fontWeight: 600 }}>
+            Budget
+          </Typography>
+          <Typography component='p'>
+            { formatPrice(movie?.budget) }
+          </Typography>
         </Box>
-      </Box>
+      }
+      {
+        !!movie?.revenue && <Box mt={2}>
+          <Typography component='p' sx={{ fontWeight: 600 }}>
+            Revenue
+          </Typography>
+          <Typography component='p'>
+            { formatPrice(movie?.revenue) }
+          </Typography>
+        </Box>
+      }
+      {
+        !!keyWords?.length && <Box mt={2}>
+          <Typography component='p' variant='h6' sx={{ fontWeight: 600 }}>
+            Keywords
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px' }}>
+            {
+              keyWords && keyWords.map(word => {
+                return (
+                  <Box
+                    sx={{ padding: '0 10px', border: '1px solid', bgcolor: 'background.paper', margin: '0 10px 10px 0' }}
+                    key={word.id}
+                  >
+                    { word.name}
+                  </Box>
+                )
+              })
+            }
+          </Box>
+        </Box>
+      }
     </Box>
   )
 }
