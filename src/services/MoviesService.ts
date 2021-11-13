@@ -9,7 +9,7 @@ interface Movies {
 }
 
 interface SearchParams {
-  language:string 
+  with_original_language:string 
   page:number
   sort_by:string
 }

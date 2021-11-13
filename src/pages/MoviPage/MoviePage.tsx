@@ -49,6 +49,7 @@ const MoviePage:React.FC = () => {
           src={data?.backdrop_path ? `${process.env.REACT_APP_IMG}${data?.backdrop_path}` : ''}
           draggable='false'
           className="movie-page__bg-poster"
+          alt={data?.title}
         />
         <Container maxWidth='xl'>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>

@@ -13,14 +13,14 @@ interface SortParams {
 
 interface Filters {
   with_genres: Array<number>,
-  language: string
+  with_original_language: string
 }
 
 const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
   const [openFilters, setOpenFilters] = useState<boolean>(true);
   const [filters, setFilters] = useState<Filters>({
     with_genres: [],
-    language: ''
+    with_original_language: ''
   });
 
   const toggleGanre = (id:number):void => {
@@ -72,11 +72,11 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
               <Box sx={{width: '100%'}}>
                 <TextField
                   variant='outlined'
-                  value={filters.language}
+                  value={filters.with_original_language}
                   select
                   fullWidth
                   label='Select language'
-                  onChange={(e) => setFilters({...filters, language: e.target.value})}
+                  onChange={(e) => setFilters({...filters, with_original_language: e.target.value})}
                 >
                   { !languages && <MenuItem value='' disabled>None</MenuItem> }
                   {
@@ -126,7 +126,7 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
             variant='contained'
             size='large'
             sx={{ backgroundColor: '#00e7ff', marginBottom: '15px', '&:hover': {backgroundColor: '#006671'} }}
-            disabled={!(filters.with_genres.length || filters.language)}
+            disabled={!(filters.with_genres.length || filters.with_original_language)}
           >
             Search
           </Button>

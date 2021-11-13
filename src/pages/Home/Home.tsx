@@ -6,7 +6,7 @@ import CPagination from '../../components/CPagination/CPagination';
 import SortMovies from '../../components/SortMovies/SortMovies';
 
 interface SearchParams {
-  language:string 
+  with_original_language:string 
   page:number
   sort_by:string
   with_genres: string,
@@ -14,7 +14,7 @@ interface SearchParams {
 
 interface Filters {
   with_genres: Array<number>,
-  language: string
+  with_original_language: string
 }
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
     page: 1, 
     sort_by: 'popularity.desc',
     with_genres: '',
-    language: 'en-US'
+    with_original_language: 'en'
   })
   const {data: results} = useFetchMoviesQuery(sortParams);
   const {data: genres} = useFetchMovieCategoriesQuery('');
@@ -37,7 +37,7 @@ export default function Home() {
     setSortParams({
       ...sortParams,
       with_genres: filters.with_genres.join(','),
-      language: filters.language
+      with_original_language: filters.with_original_language
     })
   }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, CircularProgress, Box } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, Box } from "@mui/material";
 import { FavoriteBorder } from "@mui/icons-material";
 import { IMovie } from '../../modules';
 import { useHistory } from 'react-router';

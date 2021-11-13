@@ -20,7 +20,7 @@ const LangSelect: React.FC = () => {
           {
             Object.keys(i18n.services.resourceStore.data).map(lang => {
               if (i18n.language !== lang) {
-                return <Box sx={{
+                return (<Box sx={{
                               cursor: 'pointer',
                               textTransform: 'uppercase',
                               minWidth: '35px'
@@ -29,8 +29,9 @@ const LangSelect: React.FC = () => {
                             onClick={() => i18n.changeLanguage(lang)}
                           >
                             {lang}
-                          </Box>
+                          </Box>)
               }
+              return ''
             })
           }
         </Box>
