@@ -4,6 +4,7 @@ import { InputBase, Container } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useHistory } from "react-router";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 const CSearch = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -46,6 +47,7 @@ interface Props {
 }
 
 const Search:React.FC<Props> = ({sx}) => {
+  const { t } = useTranslation();
   const history = useHistory();
   const [searchValue, setSearchVAlue] = useState<string>('');
   const goToSearchPage = (e:React.KeyboardEvent<HTMLInputElement>):void => {
@@ -61,7 +63,7 @@ const Search:React.FC<Props> = ({sx}) => {
           <SearchIcon fontSize='large' sx={{color: '#000'}} />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search…"
+          placeholder={ t('search') }
           fullWidth
           inputProps={{ 'aria-label': 'search' }}
           sx={{ height: '60px' }}

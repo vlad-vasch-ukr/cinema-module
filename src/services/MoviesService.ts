@@ -95,6 +95,15 @@ export const moviApi = createApi({
           api_key: process.env.REACT_APP_API_KEY
         }
       })
+    }),
+    fetchSearchMovies: build.query<Movies, string>({
+      query: (query:string) => ({
+        url: '/search/movie',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+          query,
+        }
+      })
     })
   })
 })
@@ -106,5 +115,6 @@ export const {
   useFetchCurrentMovieQuery, 
   useFetchRecommendationsQuery,
   useFetchMovieCreditsQuery,
-  useFetchMovieKeyWordsQuery
+  useFetchMovieKeyWordsQuery,
+  useFetchSearchMoviesQuery
 } = moviApi

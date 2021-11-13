@@ -3,6 +3,7 @@ import { Box, List, Collapse, ListItem, TextField, MenuItem, Button } from '@mui
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { useState } from 'react';
 import { IGenre, ILang } from '../../modules';
+import { useTranslation } from 'react-i18next';
 import './SortMovies.scss';
 
 interface SortParams {
@@ -17,6 +18,7 @@ interface Filters {
 }
 
 const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
+  const { t } = useTranslation();
   const [openFilters, setOpenFilters] = useState<boolean>(true);
   const [filters, setFilters] = useState<Filters>({
     with_genres: [],
@@ -58,7 +60,7 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
           }}
           onClick={() => setOpenFilters(!openFilters)}
         >
-          Filters
+          {t('main.filters.filtersTitle')}
           {openFilters ? <ExpandLess /> : <ExpandMore />}
         </Box>
         <Collapse
@@ -75,7 +77,7 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
                   value={filters.with_original_language}
                   select
                   fullWidth
-                  label='Select language'
+                  label={t('main.filters.selectLang')}
                   onChange={(e) => setFilters({...filters, with_original_language: e.target.value})}
                 >
                   { !languages && <MenuItem value='' disabled>None</MenuItem> }
@@ -87,7 +89,7 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
             </ListItem>
             <ListItem sx={{ flexDirection: 'column', padding: '0' }}>
               <Box sx={{ padding: '15px', borderBottom: '1px solid', borderTop: '1px solid', borderColor: 'divider', width: '100%', textAlign: 'start' }}>
-                Genres
+                {t('main.filters.genresTitle')}
               </Box>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', padding: '15px' }}>
                 {
@@ -128,7 +130,7 @@ const SortMovies: React.FC<SortParams> = ({ genres, languages, handler }) => {
             sx={{ backgroundColor: '#00e7ff', marginBottom: '15px', '&:hover': {backgroundColor: '#006671'} }}
             disabled={!(filters.with_genres.length || filters.with_original_language)}
           >
-            Search
+            {t('main.filters.searchButton')}
           </Button>
         </Collapse>
       </Box>

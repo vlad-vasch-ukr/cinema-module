@@ -14,6 +14,7 @@ import AboutMovie from '../../components/AboutMovie/AboutMovie';
 import CircleRating from '../../components/CircleRating/CircleRating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import { useTranslation } from 'react-i18next';
 import './MoviePage.scss';
 
 interface Params {
@@ -21,6 +22,7 @@ interface Params {
 }
 
 const MoviePage:React.FC = () => {
+  const { t } = useTranslation();
   const { id } = useParams<Params>();
   const { data: data } = useFetchCurrentMovieQuery(id);
   const { data: results } = useFetchRecommendationsQuery(id);
@@ -121,7 +123,7 @@ const MoviePage:React.FC = () => {
                 </Box>
               </Box>
               <Typography component='p' sx={{ fontWeight: 600, fontSize: '22px' }}>
-                Overview
+                { t('moviePage.overview') }
               </Typography>
               <Typography component='p'>
                 {data?.overview}
@@ -151,13 +153,13 @@ const MoviePage:React.FC = () => {
           <Grid item xs={9}>
             <Box sx={{ marginBottom: '40px' }}>
               <Typography component='h2' variant='h4' sx={{ textAlign: 'start', marginBottom: '20px' }}>
-                Top Billed Cast
+                { t('moviePage.actors') }
               </Typography>
               <MovieCredits credits={credits.data?.cast} />
             </Box>
             <Box>
               <Typography component='h2' variant='h4' sx={{ textAlign: 'start', marginBottom: '20px' }}>
-                Recommendations
+                { t('moviePage.recommend') }
               </Typography>
               <Recommendations items={ results?.results } />
             </Box>

@@ -4,6 +4,7 @@ import MoviesContainer from "../../containers/MoviesContainer";
 import { useState } from "react";
 import CPagination from '../../components/CPagination/CPagination';
 import SortMovies from '../../components/SortMovies/SortMovies';
+import { useTranslation } from 'react-i18next';
 
 interface SearchParams {
   with_original_language:string 
@@ -18,6 +19,7 @@ interface Filters {
 }
 
 export default function Home() {
+  const { t } = useTranslation();
   const [sortParams, setSortParams] = useState<SearchParams>({
     page: 1, 
     sort_by: 'popularity.desc',
@@ -45,7 +47,7 @@ export default function Home() {
     <div className="home-view">
       <Container maxWidth='lg'>
         <Typography component='h1' variant='h4' mt={4} mb={3} sx={{fontWeight: 600, textAlign: 'start'}}>
-          Popular Movies
+          { t('main.title') }
         </Typography>
         <Box display='grid' gap={3} gridTemplateColumns="repeat(12, 1fr)">
           <Box gridColumn="span 3">

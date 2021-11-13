@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "@mui/material";
 import * as Yup from 'yup';
 import AuthForm from "../../components/AuthForm/AuthForm";
+import { useTranslation } from 'react-i18next';
 import './SignUp.scss';
 
 export interface Field {
@@ -11,14 +12,15 @@ export interface Field {
 }
 
 const SignUp: React.FC = () => {
+  const { t } = useTranslation();
   const fieldsTemplate:Field[] = [
-    { type: 'email', name: 'email', label: 'Email*' },
-    { type: 'password', name: 'password', label: 'Password*' },
+    { type: 'email', name: 'email', label: t('registrationPage.labelEmail') },
+    { type: 'password', name: 'password', label: t('registrationPage.labelPassword') },
   ];
 
   const rules = Yup.object().shape({
-    email: Yup.string().required('Field is required').email('Email must be correct'),
-    password: Yup.string().required('Field is required').min(8, 'Minimum length 8')
+    email: Yup.string().required(t('rules.required')).email(t('rules.email')),
+    password: Yup.string().required(t('rules.required')).min(8, t('rules.minLen') + 8)
   });
 
   const submitForm = (form: any):void => {
@@ -32,11 +34,11 @@ const SignUp: React.FC = () => {
           <AuthForm
             rules={rules}
             fieldsTemplate={fieldsTemplate}
-            title='Sign Up'
+            title={t('signPage.title')}
             path='/registration'
-            pathName='I have an account'
+            pathName={t('signPage.pathName')}
             handler={submitForm}
-            submitBtn='sign up'
+            submitBtn={t('signPage.submit')}
           />
         </div>
       </Container>
