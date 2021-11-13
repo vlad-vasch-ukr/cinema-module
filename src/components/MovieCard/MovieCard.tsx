@@ -19,12 +19,17 @@ const MovieCard: React.FC<IMovieCard> = ({ item }) => {
   return (
     <Card sx={{ height: '100%', position: 'relative' }} onClick={ goToMovie.bind(null, item.id) }>
       <CardActionArea sx={{ height: '100%' }}>
-        <CardMedia
-          component="img"
-          height='380'
-          image={`${process.env.REACT_APP_IMG}${item.poster_path}`}
-          alt={item.title}
-        />
+        <Box sx={{height: '380px', bgcolor: '#c4c4c4'}}>
+          {
+            item.poster_path && 
+              <CardMedia
+                component="img"
+                height='380'
+                image={`${process.env.REACT_APP_IMG}${item.poster_path}`}
+                alt={item.title}
+              />
+          }
+        </Box>
         <CardContent sx={{ position: 'relative', paddingTop: '30px' }}>
           <Typography component='p' color="text.primary">
             { item.title }
