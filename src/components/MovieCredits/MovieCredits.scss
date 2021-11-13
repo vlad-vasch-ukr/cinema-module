@@ -1,7 +1,6 @@
-.movie-recommendations {
+.movie-credits {
   overflow-y: hidden;
   overflow-x: scroll;
-  white-space: nowrap;
   position: relative;
   padding-bottom: 15px;
 
@@ -22,43 +21,23 @@
 
   &__container {
     display: flex;
-    min-width: 5250px;
+    min-width: 1525px;
   }
 
-  &__poster {
+  &__img {
     display: block;
     max-width: 100%;
 
     &-wrap {
-      height: 141px;
-      width: 250px;
-      min-width: 250px;
+      height: 175px;
+      width: 138px;
+      min-width: 138px;
       overflow: hidden;
       background-color: #c4c4c4;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-  }
-
-  &__actions {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background-color: rgba(255,255,255,0.9);
-    color: #000;
-    padding: 10px;
-    transform: translateY(105%);
-    transition: transform 0.2s ease-in;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__card:hover {
-    .movie-recommendations__actions {
-      transform: translateY(0);
     }
   }
 }

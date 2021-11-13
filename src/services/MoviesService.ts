@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IMovie, IGenre, ILang, ICurrMovie, IRecommendation } from '../modules';
+import { IMovie, IGenre, ILang, ICurrMovie, IRecommendation, ICredits } from '../modules';
 
 interface Movies {
   page: number,
@@ -23,6 +23,14 @@ interface Recommendations {
   results: IRecommendation[]
   total_pages: number
   total_results: number
+}
+
+interface KeyWords {
+  id: number
+  keywords: {
+    id: number
+    name: string
+  }[]
 }
 
 export const moviApi = createApi({
@@ -71,6 +79,22 @@ export const moviApi = createApi({
           api_key: process.env.REACT_APP_API_KEY
         }
       })
+    }),
+    fetchMovieCredits: build.query<ICredits, string>({
+      query: (id:string) => ({
+        url: `/movie/${id}/credits`,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        }
+      })
+    }),
+    fetchMovieKeyWords: build.query<KeyWords, string>({
+      query: (id:string) => ({
+        url: `/movie/${id}/keywords`,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        }
+      })
     })
   })
 })
@@ -80,5 +104,7 @@ export const {
   useFetchMovieCategoriesQuery, 
   useFetchLanguagesQuery, 
   useFetchCurrentMovieQuery, 
-  useFetchRecommendationsQuery 
+  useFetchRecommendationsQuery,
+  useFetchMovieCreditsQuery,
+  useFetchMovieKeyWordsQuery
 } = moviApi

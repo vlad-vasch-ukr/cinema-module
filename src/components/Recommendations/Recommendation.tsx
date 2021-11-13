@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import TheatersIcon from '@mui/icons-material/Theaters';
 import './Recommendation.scss';
 
 interface RecommendationsProps {
@@ -30,12 +31,13 @@ const Recommendations:React.FC<RecommendationsProps> = ({ items }) => {
                 onClick={goToMovie.bind(null, item.id)}
               >
                 <div className='movie-recommendations__poster-wrap'>
-                  { item.poster_path ? 
+                  { item.backdrop_path ? 
                       <img
                         src={ `${process.env.REACT_APP_IMG}${item.backdrop_path}` }
                         alt={ item.title } draggable='false'
                         className='movie-recommendations__poster'
-                      /> : '' 
+                      /> :
+                      <TheatersIcon />
                   }
                   <div
                     className="movie-recommendations__actions"
