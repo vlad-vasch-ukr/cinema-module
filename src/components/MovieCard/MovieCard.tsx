@@ -3,13 +3,13 @@ import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, C
 import { FavoriteBorder } from "@mui/icons-material";
 import { IMovie } from '../../modules';
 import { useHistory } from 'react-router';
+import CircleRating from '../CircleRating/CircleRating';
 
 interface IMovieCard {
   item: IMovie
 }
 
 const MovieCard: React.FC<IMovieCard> = ({ item }) => {
-  const raitingColor = item.vote_average < 4 && 'error' || item.vote_average < 7 && item.vote_average >= 4 && 'warning' || 'success';
   const history = useHistory();
 
   const goToMovie = (id:number):void => {
@@ -36,33 +36,10 @@ const MovieCard: React.FC<IMovieCard> = ({ item }) => {
             sx={{
               position: 'absolute',
               top: '-23px',
-              left: '10px',
-              display: 'inline-flex',
-              backgroundColor: 'primary.main',
-              borderRadius: '50%',
-              padding: '3px'
+              left: '10px'
             }}
           >
-            <CircularProgress variant='determinate' color={ raitingColor } value={item.vote_average * 10} />
-            <Box
-              sx={{
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-                position: 'absolute',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography
-                variant="caption"
-                component="div"
-                color="#fff"
-                fontWeight='600'
-              >{`${item.vote_average * 10}%`}</Typography>
-            </Box>
+            <CircleRating raiting={ item.vote_average } />
           </Box>
         </CardContent>
       </CardActionArea>

@@ -5,13 +5,15 @@ import {
   useFetchCurrentMovieQuery, 
   useFetchRecommendationsQuery, 
   useFetchMovieCreditsQuery, 
-  useFetchMovieKeyWordsQuery,
-  useFetchMovieCategoriesQuery
+  useFetchMovieKeyWordsQuery
 } from "../../services/MoviesService";
 import Recommendations from '../../components/Recommendations/Recommendation';
 import MovieCredits from '../../components/MovieCredits/MovieCredits';
 import MovieCreationIcon from '@mui/icons-material/MovieCreation';
 import AboutMovie from '../../components/AboutMovie/AboutMovie';
+import CircleRating from '../../components/CircleRating/CircleRating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import './MoviePage.scss';
 
 interface Params {
@@ -34,7 +36,7 @@ const MoviePage:React.FC = () => {
   const getRunTime = ():string => {
     if (data?.runtime) {
       const hours = Math.floor(data?.runtime / 60);
-      const min = data?.runtime - hours;
+      const min = data?.runtime - hours * 60;
       return `${hours}h ${min}m`
     }
     return ''
@@ -53,6 +55,7 @@ const MoviePage:React.FC = () => {
             <Box
               sx={{
                 maxWidth: '300px',
+                width: '100%',
                 borderRadius: '15px',
                 overflow: 'hidden',
                 display: 'flex',
@@ -61,12 +64,13 @@ const MoviePage:React.FC = () => {
                 }}
             >
               {
-                data?.poster_path ?
+                !!data?.poster_path ?
                 <img
                   src={`${process.env.REACT_APP_IMG}${data?.poster_path}`}
                   alt={data?.original_title}
                   draggable='false'
                   className='poster'
+                  style={{width: '100%'}}
                 /> : 
                 <MovieCreationIcon />
               }
@@ -84,6 +88,35 @@ const MoviePage:React.FC = () => {
                 </Box>
                 <Box>
                   { getRunTime() }
+                </Box>
+              </Box>
+              <Box mb={3} sx={{ maxWidth: '300px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <CircleRating raiting={ data?.vote_average } />
+                <Box
+                  sx={{bgcolor: 'primary.dark',
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <FavoriteIcon />
+                </Box>
+                <Box
+                  sx={{bgcolor: 'primary.dark',
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <ListAltIcon />
                 </Box>
               </Box>
               <Typography component='p' sx={{ fontWeight: 600, fontSize: '22px' }}>
