@@ -2,6 +2,8 @@ import React from "react";
 import { styled } from '@mui/material/styles';
 import { InputBase, Container } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import { useHistory } from "react-router";
+import { useState } from "react";
 
 const CSearch = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -44,6 +46,14 @@ interface Props {
 }
 
 const Search:React.FC<Props> = ({sx}) => {
+  const history = useHistory();
+  const [searchValue, setSearchVAlue] = useState<string>('');
+  const goToSearchPage = (e:React.KeyboardEvent<HTMLInputElement>):void => {
+    if (e.key === 'Enter') {
+      history.push(`/search?query=${searchValue}`)
+    }
+  }
+
   return(
     <CSearch className={sx.join(' ')}>
       <Container maxWidth='xl'>
@@ -55,6 +65,9 @@ const Search:React.FC<Props> = ({sx}) => {
           fullWidth
           inputProps={{ 'aria-label': 'search' }}
           sx={{ height: '60px' }}
+          value={searchValue}
+          onKeyPress={goToSearchPage}
+          onChange={(e:React.ChangeEvent<HTMLInputElement>) => setSearchVAlue(e.target.value)}
         />
       </Container>     
     </CSearch>
