@@ -1,5 +1,5 @@
 import { useFetchMoviesQuery, useFetchMovieCategoriesQuery, useFetchLanguagesQuery } from "../../services/MoviesService";
-import { Container, Box } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import MoviesContainer from "../../containers/MoviesContainer";
 import { useState } from "react";
 import CPagination from '../../components/CPagination/CPagination';
@@ -44,6 +44,9 @@ export default function Home() {
   return (
     <div className="home-view">
       <Container maxWidth='lg'>
+        <Typography component='h1' variant='h4' mt={4} mb={3} sx={{fontWeight: 600, textAlign: 'start'}}>
+          Popular Movies
+        </Typography>
         <Box display='grid' gap={3} gridTemplateColumns="repeat(12, 1fr)">
           <Box gridColumn="span 3">
             <SortMovies genres={genres?.genres} languages={languages} handler={getFilters} />
