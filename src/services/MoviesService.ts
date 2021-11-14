@@ -33,6 +33,12 @@ interface KeyWords {
   }[]
 }
 
+interface Search {
+  query: string
+  language: string
+  page: number
+}
+
 export const moviApi = createApi({
   reducerPath: 'moviApi',
   baseQuery: fetchBaseQuery({
@@ -96,12 +102,14 @@ export const moviApi = createApi({
         }
       })
     }),
-    fetchSearchMovies: build.query<Movies, string>({
-      query: (query:string) => ({
+    fetchSearchMovies: build.query<Movies, Search>({
+      query: ({query, language, page}) => ({
         url: '/search/movie',
         params: {
           api_key: process.env.REACT_APP_API_KEY,
           query,
+          language,
+          page
         }
       })
     })

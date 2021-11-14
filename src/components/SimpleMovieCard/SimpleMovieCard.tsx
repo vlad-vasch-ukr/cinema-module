@@ -13,8 +13,11 @@ interface Props {
 const SimpleMovieCard:React.FC<Props> = ({ item }) => {
   const history = useHistory();
   const formatDate = ():string => {
-    const dateArr = item.release_date.split('-');
-    return format('PPP', new Date(+dateArr[0], +dateArr[1], +dateArr[2]));
+    if (item.release_date) {
+      const dateArr = item.release_date.split('-');
+      return format('PPP', new Date(+dateArr[0], +dateArr[1], +dateArr[2]));
+    }
+    return ''
   }
 
   const goToMovie = ():void => {
