@@ -11,8 +11,11 @@ const themeSlice = createSlice({
     toggleTheme: (state) => {
       state.isLightMode = !state.isLightMode;
     },
+    changeCurrTheme: (state, action) => {
+      state.isLightMode = action.payload
+    }
   },
 });
 
-export const { toggleTheme } = themeSlice.actions;
+export const { toggleTheme, changeCurrTheme } = themeSlice.actions;
 export const themeReducer = themeSlice.reducer;

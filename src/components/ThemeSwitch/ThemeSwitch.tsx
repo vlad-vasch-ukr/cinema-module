@@ -2,8 +2,9 @@ import React from "react";
 import clsx from 'clsx';
 import { styled } from '@mui/system';
 import { useSwitch } from '@mui/core/SwitchUnstyled';
-import { toggleTheme } from "../../store/reducers/Theme";
+import { toggleTheme, changeCurrTheme } from "../../store/reducers/Theme";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import { useEffect } from "react";
 
 const SwitchRoot = styled('span')`
   display: inline-block;
@@ -77,6 +78,7 @@ export interface switchProps {
 const MUISwitch: React.FC<switchProps> = (props) => {
   const { getInputProps, checked, disabled, focusVisible } = useSwitch(props);
   const dispatch = useAppDispatch();
+  const { isLightMode } = useAppSelector(store => store.themeReducer)
 
   const stateClasses = {
     checked,
@@ -84,8 +86,22 @@ const MUISwitch: React.FC<switchProps> = (props) => {
     focusVisible,
   };
 
+  useEffect(() => {
+    const darkTheme = localStorage.getItem('cinema-theme');
+    if (darkTheme) {
+      const darkThemeBool = darkTheme === 'light';
+      dispatch(changeCurrTheme(darkThemeBool));
+    }
+  }, [])
+
+  const changeTheme = ():void => {
+    const theme = !isLightMode ? 'light' : 'dark';
+    localStorage.setItem('cinema-theme', theme);
+    dispatch(toggleTheme());
+  }
+
   return (
-    <SwitchRoot className={clsx(stateClasses)} onClick={() => dispatch(toggleTheme())}>
+    <SwitchRoot className={clsx(stateClasses)} onClick={changeTheme}>
       <SwitchTrack>
         <SwitchThumb className={clsx(stateClasses)} />
       </SwitchTrack>

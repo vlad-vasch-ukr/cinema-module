@@ -39,6 +39,12 @@ interface Search {
   page: number
 }
 
+interface FavoriteMoviesParams {
+  session_id: string | null
+  language: string
+  page: number
+}
+
 export const moviApi = createApi({
   reducerPath: 'moviApi',
   baseQuery: fetchBaseQuery({
@@ -112,6 +118,15 @@ export const moviApi = createApi({
           page
         }
       })
+    }),
+    fetchFavoriteMovies: build.query<Movies, FavoriteMoviesParams>({
+      query: (params) => ({
+        url: '/account/-/favorite/movies',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+          ...params
+        }
+      })
     })
   })
 })
@@ -124,5 +139,6 @@ export const {
   useFetchRecommendationsQuery,
   useFetchMovieCreditsQuery,
   useFetchMovieKeyWordsQuery,
-  useFetchSearchMoviesQuery
+  useFetchSearchMoviesQuery,
+  useFetchFavoriteMoviesQuery
 } = moviApi

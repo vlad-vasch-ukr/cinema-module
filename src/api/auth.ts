@@ -19,23 +19,13 @@ export const generateToken = async () => {
   return request_token;
 };
 
-export const generateSessionId = async (requestToken:string | null):Promise<string> => {
+export const generateSessionId = async (requestToken:string | null) => {
   const { data: session_id } = await authAxios.post(
     '/authentication/session/new',
     { request_token: requestToken }
   );
   localStorage.setItem('session_id', session_id.session_id);
   return session_id;
-};
-
-export const getUserAccount = async (sessionId:string) => {
-  const { data } = await authAxios.get('/account', {
-    params: {
-      session_id: sessionId,
-    },
-  });
-
-  return data;
 };
 
 export const deleteSession = async (session_id:string) => {

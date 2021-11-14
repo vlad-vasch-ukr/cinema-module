@@ -47,7 +47,7 @@ export default function Home() {
   }
 
   return (
-    <div className="home-view">
+    <Box sx={{ paddingBottom: '100px' }}>
       <Container maxWidth='lg'>
         <Typography component='h1' variant='h4' mt={4} mb={3} sx={{fontWeight: 600, textAlign: 'start'}}>
           { t('main.title') }
@@ -70,6 +70,6 @@ export default function Home() {
           </Box>
         </Box>
       </Container>
-    </div>
+    </Box>
   )
 }
