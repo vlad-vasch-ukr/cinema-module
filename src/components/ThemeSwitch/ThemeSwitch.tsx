@@ -92,7 +92,7 @@ const MUISwitch: React.FC<switchProps> = (props) => {
       const darkThemeBool = darkTheme === 'light';
       dispatch(changeCurrTheme(darkThemeBool));
     }
-  }, [])
+  }, [dispatch])
 
   const changeTheme = ():void => {
     const theme = !isLightMode ? 'light' : 'dark';

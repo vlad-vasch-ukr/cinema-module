@@ -9,9 +9,11 @@ interface Props {
 }
 
 const MovieCredits:React.FC<Props> = ({ credits }) => {
+  const containerWidth = credits ? 153 * credits.slice(0, 10).length + 'px' : 0;
+
   return (
     <div className="movie-credits">
-      <div className="movie-credits__container">
+      <Box sx={{ minWidth: containerWidth, display: 'flex' }}>
         {
           credits && credits.slice(0, 10).map(credit => {
             return (
@@ -40,7 +42,7 @@ const MovieCredits:React.FC<Props> = ({ credits }) => {
             )
           })
         }
-      </div>
+      </Box>
     </div>
   )
 }

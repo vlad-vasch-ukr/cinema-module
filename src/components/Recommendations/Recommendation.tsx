@@ -14,13 +14,14 @@ interface RecommendationsProps {
 
 const Recommendations:React.FC<RecommendationsProps> = ({ items }) => {
   const history = useHistory();
+  const containerWidth = items ? 260 * items.length + 'px' : 0;
   const goToMovie = (id:number):void => {
     history.push(`/movie/${id}`)
   }
 
   return (
     <div className="movie-recommendations">
-      <div className="movie-recommendations__container">
+      <Box sx={{ display: 'flex', minWidth: containerWidth }}>
         {
           items && items.map((item) => {
             return (
@@ -73,7 +74,7 @@ const Recommendations:React.FC<RecommendationsProps> = ({ items }) => {
             )
           })
         }
-      </div>
+      </Box>
     </div>
   )
 }
