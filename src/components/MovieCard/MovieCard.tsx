@@ -1,13 +1,10 @@
 import React from "react";
 import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, Box, Collapse } from "@mui/material";
-import { Favorite } from "@mui/icons-material";
 import { IMovie } from '../../modules';
 import { useHistory } from 'react-router';
 import { useState } from "react";
-import { useMarkMovieAsFavoriteMutation, useCheckMarkMovieQuery } from "../../services/UserService";
 import CircleRating from '../CircleRating/CircleRating';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 import CardOptions from '../CardOptions/CardOptions';
 
 interface IMovieCard {

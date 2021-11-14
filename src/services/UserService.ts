@@ -39,6 +39,15 @@ interface MarkParams {
   id: number
 }
 
+interface ListPost {
+  session_id: string | null
+  body: {
+    media_type: string
+    media_id: number
+    watchlist: boolean
+  }
+}
+
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
@@ -73,8 +82,19 @@ export const userApi = createApi({
           session_id
         },
       })
-    })
+    }),
+    addMovieToList: build.mutation<MarkGet, ListPost>({
+      query: ({session_id, body}) => ({
+        url: `/account/{account_id}/watchlist`,
+        method: 'POST',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+          session_id
+        },
+        body
+      })
+    }),
   })
 })
 
-export const { useFetchUserQuery, useMarkMovieAsFavoriteMutation, useCheckMarkMovieQuery } = userApi
+export const { useFetchUserQuery, useMarkMovieAsFavoriteMutation, useCheckMarkMovieQuery, useAddMovieToListMutation } = userApi

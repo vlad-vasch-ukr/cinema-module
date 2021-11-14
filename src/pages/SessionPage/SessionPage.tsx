@@ -12,7 +12,8 @@ const SessionPage:React.FC = () => {
     generateSessionId(token).then(() => {
       history.push('/')
     })
-  })
+    return () => localStorage.removeItem("request_token");
+  }, [history])
 
   return(
     <div className="session-page">
