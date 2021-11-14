@@ -1,4 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const fetchUser = createAsyncThunk(
+  "user/fetchUser",
+  async () => {
+    
+  }
+)
 
 const initialState = {
   user: {},

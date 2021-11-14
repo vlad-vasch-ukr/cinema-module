@@ -3,6 +3,7 @@ import { Container } from "@mui/material";
 import * as Yup from 'yup';
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { useTranslation } from 'react-i18next';
+import { generateToken } from "../../api/auth";
 import './SignUp.scss';
 
 export interface Field {
@@ -23,8 +24,16 @@ const SignUp: React.FC = () => {
     password: Yup.string().required(t('rules.required')).min(8, t('rules.minLen') + 8)
   });
 
-  const submitForm = (form: any):void => {
-    console.log(form)
+  const fetchToken = async () => {
+    const token = await generateToken();
+    console.log(token)
+
+    const redirectUrl = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://${window.location.host}/session`;
+    window.open(redirectUrl, '_blank', 'noopener noreferrer');
+  };
+
+  const submitForm = ():void => {
+    fetchToken()
   };
 
   return (

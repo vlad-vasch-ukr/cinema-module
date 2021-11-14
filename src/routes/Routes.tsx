@@ -7,6 +7,7 @@ import MoviePage from '../pages/MoviPage/MoviePage';
 import Registration from '../pages/Registration/Registration';
 import SignUp from '../pages/SignUp/SignUp';
 import SearchPage from '../pages/SearchPage/SearchPage';
+import SessionPage from '../pages/SessionPage/SessionPage';
 import './Routes.scss';
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
   { path: '/registration', name: 'Registration', Component: Registration },
   { path: '/sign-up', name: 'SignUp', Component: SignUp },
   { path: '/search', name: 'SearchPage', Component: SearchPage },
+  { path: '/session', name: 'SessionPage', Component: SessionPage },
 ]
 
 

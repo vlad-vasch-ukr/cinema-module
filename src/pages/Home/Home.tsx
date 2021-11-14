@@ -5,6 +5,7 @@ import { useState } from "react";
 import CPagination from '../../components/CPagination/CPagination';
 import SortMovies from '../../components/SortMovies/SortMovies';
 import { useTranslation } from 'react-i18next';
+import { useFetchUserQuery } from '../../services/UserService';
 
 interface SearchParams {
   with_original_language:string 
@@ -19,6 +20,7 @@ interface Filters {
 }
 
 export default function Home() {
+  const sessionId = localStorage.getItem('session_id');
   const { t } = useTranslation();
   const [sortParams, setSortParams] = useState<SearchParams>({
     page: 1, 
@@ -29,6 +31,7 @@ export default function Home() {
   const {data: results} = useFetchMoviesQuery(sortParams);
   const {data: genres} = useFetchMovieCategoriesQuery('');
   const { data: languages } = useFetchLanguagesQuery('');
+  const user = useFetchUserQuery(sessionId);
   const changePage = (page:number):void => {
     setSortParams({
       ...sortParams,

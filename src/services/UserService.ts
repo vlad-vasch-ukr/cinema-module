@@ -1,24 +1,30 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
+interface User {
+  avatar: object
+  gravatar: {
+    hash: string
+  }
+  id: number
+  iso_639_1: string
+  iso_3166_1: string
+  name: string
+  include_adult: boolean
+  username: string
+}
+
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.themoviedb.org/3'
+    baseUrl: process.env.REACT_APP_API_URL
   }),
   endpoints: (build) => ({
-    fetchUser: build.query({
-      query: () => ({
-        url: '/discover/movie?api_key=2f0edced0eb8f8de8ec567844341d6df',
+    fetchUser: build.query<User, string | null>({
+      query: (session_id) => ({
+        url: '/account',
         params: {
-
-        }
-      })
-    }),
-    getAuthToken: build.query({
-      query: () => ({
-        url: '/authentication/token/new',
-        params: {
-          api_key: process.env.REACT_APP_API_KEY
+          api_key: process.env.REACT_APP_API_KEY,
+          session_id
         }
       })
     })
