@@ -13,6 +13,32 @@ interface User {
   username: string
 }
 
+interface MarkGet {
+  status_code: number
+  status_message: string
+}
+
+interface MarkPost {
+  session_id: string | null
+  body: {
+    media_type: string
+    media_id: number
+    favorite: boolean
+  }
+}
+
+interface Favorite {
+  id: number
+  favorite: boolean
+  rated: object | boolean
+  watchlist: boolean
+}
+
+interface MarkParams {
+  session_id: string | null
+  id: number
+}
+
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
@@ -27,8 +53,28 @@ export const userApi = createApi({
           session_id
         }
       })
+    }),
+    markMovieAsFavorite: build.mutation<MarkGet, MarkPost>({
+      query: ({session_id, body}) => ({
+        url: `/account/-/favorite`,
+        method: 'POST',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+          session_id
+        },
+        body
+      })
+    }),
+    checkMarkMovie: build.query<Favorite, MarkParams>({
+      query: ({session_id, id}) => ({
+        url: `/movie/${id}/account_states`,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY,
+          session_id
+        },
+      })
     })
   })
 })
 
-export const { useFetchUserQuery } = userApi
+export const { useFetchUserQuery, useMarkMovieAsFavoriteMutation, useCheckMarkMovieQuery } = userApi

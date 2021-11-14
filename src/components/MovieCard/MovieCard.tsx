@@ -1,9 +1,14 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, Box } from "@mui/material";
-import { FavoriteBorder } from "@mui/icons-material";
+import { Card, CardMedia, CardContent, Typography, CardActionArea, IconButton, Box, Collapse } from "@mui/material";
+import { Favorite } from "@mui/icons-material";
 import { IMovie } from '../../modules';
 import { useHistory } from 'react-router';
+import { useState } from "react";
+import { useMarkMovieAsFavoriteMutation, useCheckMarkMovieQuery } from "../../services/UserService";
 import CircleRating from '../CircleRating/CircleRating';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
+import CardOptions from '../CardOptions/CardOptions';
 
 interface IMovieCard {
   item: IMovie
@@ -11,9 +16,15 @@ interface IMovieCard {
 
 const MovieCard: React.FC<IMovieCard> = ({ item }) => {
   const history = useHistory();
-
+  const [openOptions, setOpenOptions] = useState<boolean>(false);
+  
   const goToMovie = (id:number):void => {
     history.push(`/movie/${id}`)
+  }
+
+  const toggleOptions = (e:React.MouseEvent<HTMLButtonElement>):void => {
+    e.stopPropagation();
+    setOpenOptions(!openOptions);
   }
 
   return (
@@ -48,13 +59,39 @@ const MovieCard: React.FC<IMovieCard> = ({ item }) => {
           </Box>
         </CardContent>
       </CardActionArea>
-      <IconButton
-        aria-label="add to favorites"
-        onClick={(e:React.MouseEvent<HTMLButtonElement>) => console.log('favorite')}
-        sx={{ position: 'absolute', top: '5px', right: '5px' }}
-      >
-        <FavoriteBorder sx={{ color: '#000', '&:hover': { color: '#f30000' } }} />
-      </IconButton>
+      <Box sx={{ position: 'absolute', top: '5px', right: '5px', zIndex: 50 }}>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={toggleOptions}
+          sx={{
+            backgroundColor: '#c4c4c4',
+            height: '30px',
+            width: '32px',
+            '&:hover': { backgroundColor: '#15d9e2' },
+            transition: 'all 0.3s ease-in'
+          }}
+        >
+          <MoreVertIcon sx={{ color: '#000' }} />
+        </IconButton>
+        <Collapse
+          in={openOptions}
+          sx={{
+            backgroundColor: '#fff',
+            borderRadius: '5px',
+            overflow: 'hidden',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            transform: 'translate(-100%, 100%)',
+            color: '#000',
+            fontSize: '12px',
+            minWidth: '125px',
+            minHeight: '80px'
+          }}
+        >
+          { openOptions && <CardOptions id={item.id} /> }
+        </Collapse>
+      </Box>
     </Card>
   )
 }
