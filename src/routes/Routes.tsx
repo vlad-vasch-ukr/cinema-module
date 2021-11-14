@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useRef } from 'react';
 import { CSSTransition } from "react-transition-group";
 import Home from '../pages/Home/Home';
@@ -9,6 +9,7 @@ import SignUp from '../pages/SignUp/SignUp';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import SessionPage from '../pages/SessionPage/SessionPage';
 import FavoritePage from '../pages/FavoritePage/FavoritePage';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import './Routes.scss';
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
   { path: '/search', name: 'SearchPage', Component: SearchPage },
   { path: '/session', name: 'SessionPage', Component: SessionPage },
   { path: '/favorite', name: 'FavoritePage', Component: FavoritePage },
+  { path: '/404', name: 'ErrorPage', Component: ErrorPage }
 ]
 
 
@@ -45,6 +47,7 @@ export default function Routes() {
           <Component />
         </Route>
       ))}
+      <Route component={ErrorPage} />
     </>
   );
 }
