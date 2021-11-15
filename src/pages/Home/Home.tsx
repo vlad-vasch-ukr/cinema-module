@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <Box sx={{ paddingBottom: '100px' }}>
-      <Container maxWidth='lg'>
+      <Container maxWidth='xl'>
         <Typography component='h1' variant='h4' mt={4} mb={3} sx={{fontWeight: 600, textAlign: 'start'}}>
           { t('main.title') }
         </Typography>

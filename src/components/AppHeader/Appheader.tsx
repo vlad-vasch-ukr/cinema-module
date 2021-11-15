@@ -8,6 +8,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from "react";
 import Search from "../Search/Search";
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import './AppHeader.scss';
 
 const AppHeader: React.FC = () => {
@@ -21,6 +22,14 @@ const AppHeader: React.FC = () => {
           <Toolbar>
             <Box className='app-logo' sx={{marginRight: '20px'}}>
               <Link to='/'>cinema</Link>
+            </Box>
+            <Box>
+              <Link to='/' style={{color: 'inherit', textDecoration: 'none', fontWeight: 600}}>
+                Popular Movies
+              </Link>
+              <Link to='/favorite' style={{color: 'inherit', textDecoration: 'none', fontWeight: 600, marginLeft: '15px'}}>
+                Favorite movies
+              </Link>
             </Box>
             <Box sx={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>
               <Box sx={{marginLeft: 'auto', marginRight: '20px'}}>
@@ -50,6 +59,19 @@ const AppHeader: React.FC = () => {
                     overflow: 'hidden'
                   }}
                 >
+                  <Box
+                    sx={{
+                      bgcolor: 'primary.light',
+                      padding: '15px',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <PersonOutlineIcon sx={{marginRight: '10px'}} />
+                    <Link to='/profile' style={{color: 'inherit', textDecoration: 'none'}}>Profile</Link>
+                  </Box>
                   <Box
                     sx={{
                       bgcolor: 'primary.light',

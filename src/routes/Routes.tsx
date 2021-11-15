@@ -58,8 +58,8 @@ export default function Routes() {
       <Route path="/session" component={SessionPage} />
       <Route path="/favorite" component={FavoritePage} />
       <Route path="/profile" component={UserPage} />
-      <Route path="*" component={ErrorPage} />
-      
+      <Route path="/404" component={ErrorPage} />
+      {/* <Redirect to="/404" /> */}
     </>
   );
 }
