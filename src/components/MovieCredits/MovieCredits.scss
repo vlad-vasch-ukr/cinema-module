@@ -1,0 +1,38 @@
+.movie-credits {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  position: relative;
+  padding-bottom: 15px;
+
+  &::-webkit-scrollbar-track {
+    background: rgba($color: #000000, $alpha: 0.1);
+    opacity: 0;
+  }
+
+  &::-webkit-scrollbar {
+    height: 10px;
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    border-radius: 5px;
+  }
+
+  &__img {
+    display: block;
+    max-width: 100%;
+
+    &-wrap {
+      height: 175px;
+      width: 138px;
+      min-width: 138px;
+      overflow: hidden;
+      background-color: #c4c4c4;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

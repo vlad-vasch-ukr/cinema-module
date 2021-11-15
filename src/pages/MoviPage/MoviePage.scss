@@ -1,0 +1,24 @@
+.movie-page {
+  padding-bottom: 100px;
+
+  &__bg-poster {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    filter: blur(1px);
+  }
+
+  &__header {
+    overflow: hidden;
+    min-height: 510px;
+    background-color: rgba($color: #111011, $alpha: 0.9);
+  }
+
+  .poster {
+    display: block;
+    max-width: 100%;
+  }
+}

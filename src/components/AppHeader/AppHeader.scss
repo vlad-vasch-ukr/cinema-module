@@ -1,0 +1,18 @@
+.nav-bar {
+  position: relative;
+  z-index: 100;
+}
+
+.search {
+  position: absolute!important;
+  z-index: -1!important;
+  width: 100%!important;
+  left: 0!important;
+  margin-left: 0!important;
+  bottom: 0!important;
+  transition: transform 0.3s ease-in;
+
+  &.open {
+    transform: translateY(100%)!important;
+  }
+}
