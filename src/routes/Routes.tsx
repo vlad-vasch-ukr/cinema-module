@@ -10,6 +10,7 @@ import SearchPage from '../pages/SearchPage/SearchPage';
 import SessionPage from '../pages/SessionPage/SessionPage';
 import FavoritePage from '../pages/FavoritePage/FavoritePage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import UserPage from '../pages/UserPage/UserPage';
 import './Routes.scss';
 
 const routes = [
@@ -20,6 +21,7 @@ const routes = [
   { path: '/search', name: 'SearchPage', Component: SearchPage },
   { path: '/session', name: 'SessionPage', Component: SessionPage },
   { path: '/favorite', name: 'FavoritePage', Component: FavoritePage },
+  { path: '/profile', name: 'UserPage', Component: UserPage },
   { path: '/404', name: 'ErrorPage', Component: ErrorPage }
 ]
 
@@ -55,6 +57,7 @@ export default function Routes() {
       <Route path="/search" component={SearchPage} />
       <Route path="/session" component={SessionPage} />
       <Route path="/favorite" component={FavoritePage} />
+      <Route path="/profile" component={UserPage} />
       <Route path="*" component={ErrorPage} />
       
     </>

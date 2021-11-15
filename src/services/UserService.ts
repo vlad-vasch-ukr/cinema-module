@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
 interface User {
-  avatar: object
+  avatar: any
   gravatar: {
     hash: string
   }
