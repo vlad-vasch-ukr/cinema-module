@@ -33,7 +33,7 @@ export const en = {
   },
   signPage: {
     title: 'Sign Up',
-    pathName: 'I have an account',
+    pathName: `I haven't an account`,
     submit: 'sign up',
   },
   rules: {
@@ -48,8 +48,8 @@ export const en = {
     title: 'Favorite movies'
   },
   header: {
-    popularLink: 'Popular Movies',
-    favoriteLink: 'Favorite Movies',
+    popularLink: 'Popular',
+    favoriteLink: 'Favorite',
     profile: 'Profile',
     exit: 'Exit'
   }

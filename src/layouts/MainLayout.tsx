@@ -1,5 +1,6 @@
 import React from "react";
 import AppHeader from "../components/AppHeader/Appheader";
+import AppFooter from "../components/AppFooter/AppFooter";
 
 const MainLayout: React.FC = ({children}) => {
   return (
@@ -8,6 +9,7 @@ const MainLayout: React.FC = ({children}) => {
       <main>
         { children }
       </main>
+      <AppFooter />
     </div>
   )
 }

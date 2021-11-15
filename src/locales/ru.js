@@ -33,7 +33,7 @@ export const ru = {
   },
   signPage: {
     title: 'Войти',
-    pathName: 'У меня есть аккаунт',
+    pathName: 'У меня нет аккаунта',
     submit: 'войти',
   },
   rules: {
@@ -48,8 +48,8 @@ export const ru = {
     title: 'Любимые фильмы'
   },
   header: {
-    popularLink: 'Популярные фильмы',
-    favoriteLink: 'Любимые фильмы',
+    popularLink: 'Популярные',
+    favoriteLink: 'Любимые',
     profile: 'Профиль',
     exit: 'Выход'
   }
