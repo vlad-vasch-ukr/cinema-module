@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Grid } from '@mui/material';
+import { Container, Typography, Grid, Box } from '@mui/material';
 import { useFetchFavoriteMoviesQuery } from '../../services/MoviesService';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import CPagination from '../../components/CPagination/CPagination';
@@ -13,7 +13,7 @@ interface FavoriteMoviesParams {
 }
 
 const FavoritePage:React.FC = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const sessionId = localStorage.getItem('session_id');
   const [params, setParams] = useState<FavoriteMoviesParams>({
     session_id: sessionId,
@@ -43,10 +43,10 @@ const FavoritePage:React.FC = () => {
   }
 
   return(
-    <div className="favorite-page">
+    <Box className="favorite-page" sx={{ paddingBottom: '100px' }}>
       <Container maxWidth='xl'>
         <Typography component='h1' variant='h4' mt={4} mb={3} sx={{fontWeight: 600, textAlign: 'start'}}>
-          Favorite movies
+          { t('favoritePage.title') }
         </Typography>
         <Grid container spacing={4}>
           {
@@ -69,7 +69,7 @@ const FavoritePage:React.FC = () => {
             />
         }
       </Container>
-    </div>
+    </Box>
   )
 }
 

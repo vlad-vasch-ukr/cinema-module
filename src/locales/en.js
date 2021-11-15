@@ -43,5 +43,14 @@ export const en = {
     confirmPassword: 'Password mismatch',
     date: 'Please enter the correct date',
     latin: 'Latin letters only'
+  },
+  favoritePage: {
+    title: 'Favorite movies'
+  },
+  header: {
+    popularLink: 'Popular Movies',
+    favoriteLink: 'Favorite Movies',
+    profile: 'Profile',
+    exit: 'Exit'
   }
 }

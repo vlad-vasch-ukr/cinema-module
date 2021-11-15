@@ -43,5 +43,14 @@ export const ru = {
     confirmPassword: 'Пароли не совпадают',
     date: 'Пожалуйста, введите правильную дату',
     latin: 'Только латинские буквы'
+  }, 
+  favoritePage: {
+    title: 'Любимые фильмы'
+  },
+  header: {
+    popularLink: 'Популярные фильмы',
+    favoriteLink: 'Любимые фильмы',
+    profile: 'Профиль',
+    exit: 'Выход'
   }
 }

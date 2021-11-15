@@ -11,6 +11,7 @@ import Search from "../Search/Search";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { useRemoveSessionMutation } from "../../services/UserService";
 import { useHistory } from "react-router";
+import { useTranslation } from "react-i18next";
 import './AppHeader.scss';
 
 const AppHeader: React.FC = () => {
@@ -19,6 +20,7 @@ const AppHeader: React.FC = () => {
   const session_id = localStorage.getItem('session_id');
   const [removeSession] = useRemoveSessionMutation();
   const history = useHistory();
+  const { t } = useTranslation();
 
   const exit = async () => {
     await removeSession(session_id);
@@ -37,10 +39,10 @@ const AppHeader: React.FC = () => {
             </Box>
             <Box>
               <Link to='/' style={{color: 'inherit', textDecoration: 'none', fontWeight: 600}}>
-                Popular Movies
+                { t('header.popularLink') }
               </Link>
               <Link to='/favorite' style={{color: 'inherit', textDecoration: 'none', fontWeight: 600, marginLeft: '15px'}}>
-                Favorite movies
+                { t('header.favoriteLink') }
               </Link>
             </Box>
             <Box sx={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>
@@ -87,7 +89,7 @@ const AppHeader: React.FC = () => {
                       style={{color: 'inherit', textDecoration: 'none'}}
                       onClick={() => setOpenAccount(false)}
                     >
-                      Profile
+                      { t('header.profile') }
                     </Link>
                   </Box>
                   <Box
@@ -102,7 +104,7 @@ const AppHeader: React.FC = () => {
                     onClick={exit}
                   >
                     <ExitToAppIcon sx={{marginRight: '10px'}} />
-                    Exit
+                    { t('header.exit') }
                   </Box>
                 </Collapse>
               </Box>
