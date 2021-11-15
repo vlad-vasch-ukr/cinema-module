@@ -22,7 +22,7 @@ interface MarkPost {
   session_id: string | null
   body: {
     media_type: string
-    media_id: number
+    media_id: number | string
     favorite: boolean
   }
 }
@@ -36,14 +36,14 @@ interface Favorite {
 
 interface MarkParams {
   session_id: string | null
-  id: number
+  id: number | string
 }
 
 interface ListPost {
   session_id: string | null
   body: {
     media_type: string
-    media_id: number
+    media_id: number | string
     watchlist: boolean
   }
 }

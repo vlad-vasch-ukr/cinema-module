@@ -7,6 +7,7 @@ import {
   useFetchMovieCreditsQuery, 
   useFetchMovieKeyWordsQuery
 } from "../../services/MoviesService";
+import { useCheckMarkMovieQuery, useMarkMovieAsFavoriteMutation, useAddMovieToListMutation } from "../../services/UserService";
 import Recommendations from '../../components/Recommendations/Recommendation';
 import MovieCredits from '../../components/MovieCredits/MovieCredits';
 import MovieCreationIcon from '@mui/icons-material/MovieCreation';
@@ -28,6 +29,10 @@ const MoviePage:React.FC = () => {
   const { data: results } = useFetchRecommendationsQuery(id);
   const credits = useFetchMovieCreditsQuery(id);
   const keyWords = useFetchMovieKeyWordsQuery(id);
+  const session_id = localStorage.getItem('session_id');
+  const marked = useCheckMarkMovieQuery({session_id, id});
+  const [markMovieAsFavorite, {}] = useMarkMovieAsFavoriteMutation();
+  const [addMovieToList, {}] = useAddMovieToListMutation();
 
   const getGenres = ():string => {
     const genres = data?.genres.map(genre => genre.name);
@@ -42,6 +47,40 @@ const MoviePage:React.FC = () => {
       return `${hours}h ${min}m`
     }
     return ''
+  }
+
+  const markMovie = async (e:React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const params = {
+      session_id: session_id,
+      body: {
+        media_type: 'movie',
+        media_id: id,
+        favorite: true
+      }
+    }
+    if (marked.data?.favorite) {
+      params.body.favorite = false
+    }
+    await markMovieAsFavorite(params);
+    marked.refetch()
+  }
+
+  const markList = async (e:React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const params = {
+      session_id: session_id,
+      body: {
+        media_type: 'movie',
+        media_id: id,
+        watchlist: true
+      }
+    }
+    if (marked.data?.watchlist) {
+      params.body.watchlist = false
+    }
+    await addMovieToList(params);
+    marked.refetch()
   }
 
   return (
@@ -105,8 +144,9 @@ const MoviePage:React.FC = () => {
                     justifyContent: 'center',
                     cursor: 'pointer'
                   }}
+                  onClick={markMovie}
                 >
-                  <FavoriteIcon />
+                  <FavoriteIcon sx={{color: marked.data?.favorite ? '#f30000' : '#000'}} />
                 </Box>
                 <Box
                   sx={{bgcolor: 'primary.dark',
@@ -118,8 +158,9 @@ const MoviePage:React.FC = () => {
                     justifyContent: 'center',
                     cursor: 'pointer'
                   }}
+                  onClick={markList}
                 >
-                  <ListAltIcon />
+                  <ListAltIcon sx={{color: marked.data?.watchlist ? '#f30000' : '#000'}} />
                 </Box>
               </Box>
               <Typography component='p' sx={{ fontWeight: 600, fontSize: '22px' }}>
