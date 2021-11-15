@@ -6,6 +6,11 @@ interface Props {
 }
 
 const CircleRating:React.FC<Props> = ({ raiting = 0 }) => {
+  const getColor = () => {
+    if (raiting < 4) return 'error';
+    if (raiting < 7 && raiting >= 4) return 'warning';
+    return 'success'
+  }
   
   return (
     <Box 
@@ -19,7 +24,7 @@ const CircleRating:React.FC<Props> = ({ raiting = 0 }) => {
     >
       <CircularProgress
         variant='determinate'
-        color={ (raiting < 4 && 'error' || raiting < 7 && raiting >= 4 && 'warning' || 'success') }
+        color={ getColor() }
         value={Math.round(raiting * 10)}
       />
       <Box

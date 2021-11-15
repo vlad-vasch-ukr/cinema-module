@@ -25,7 +25,7 @@ interface Params {
 const MoviePage:React.FC = () => {
   const { t } = useTranslation();
   const { id } = useParams<Params>();
-  const { data: data } = useFetchCurrentMovieQuery(id);
+  const { data } = useFetchCurrentMovieQuery(id);
   const { data: results } = useFetchRecommendationsQuery(id);
   const credits = useFetchMovieCreditsQuery(id);
   const keyWords = useFetchMovieKeyWordsQuery(id);
