@@ -9,11 +9,24 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState } from "react";
 import Search from "../Search/Search";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { useRemoveSessionMutation } from "../../services/UserService";
+import { useHistory } from "react-router";
 import './AppHeader.scss';
 
 const AppHeader: React.FC = () => {
   const [openAccount, setOpenAccount] = useState<boolean>(false);
   const [openSearch, setOpenSearch] = useState<boolean>(false);
+  const session_id = localStorage.getItem('session_id');
+  const [removeSession] = useRemoveSessionMutation();
+  const history = useHistory();
+
+  const exit = async () => {
+    const res = await removeSession(session_id);
+    console.log(res)
+    localStorage.removeItem('session_id')
+    history.push('/sign-up');
+    setOpenAccount(false);
+  }
 
   return (
     <div className="nav-bar">
@@ -70,7 +83,13 @@ const AppHeader: React.FC = () => {
                     }}
                   >
                     <PersonOutlineIcon sx={{marginRight: '10px'}} />
-                    <Link to='/profile' style={{color: 'inherit', textDecoration: 'none'}}>Profile</Link>
+                    <Link
+                      to='/profile'
+                      style={{color: 'inherit', textDecoration: 'none'}}
+                      onClick={() => setOpenAccount(false)}
+                    >
+                      Profile
+                    </Link>
                   </Box>
                   <Box
                     sx={{
@@ -81,6 +100,7 @@ const AppHeader: React.FC = () => {
                       alignItems: 'center',
                       cursor: 'pointer'
                     }}
+                    onClick={exit}
                   >
                     <ExitToAppIcon sx={{marginRight: '10px'}} />
                     Exit

@@ -48,6 +48,10 @@ interface ListPost {
   }
 }
 
+interface DeleteSession {
+  success: boolean
+}
+
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
@@ -85,7 +89,7 @@ export const userApi = createApi({
     }),
     addMovieToList: build.mutation<MarkGet, ListPost>({
       query: ({session_id, body}) => ({
-        url: `/account/{account_id}/watchlist`,
+        url: `/account/-/watchlist`,
         method: 'POST',
         params: {
           api_key: process.env.REACT_APP_API_KEY,
@@ -94,7 +98,25 @@ export const userApi = createApi({
         body
       })
     }),
+    removeSession: build.mutation<DeleteSession, string | null>({
+      query: (session_id) => ({
+        url: `/authentication/session`,
+        method: 'DELETE',
+        params: {
+          api_key: process.env.REACT_APP_API_KEY
+        },
+        body: {
+          session_id
+        }
+      })
+    }),
   })
 })
 
-export const { useFetchUserQuery, useMarkMovieAsFavoriteMutation, useCheckMarkMovieQuery, useAddMovieToListMutation } = userApi
+export const {
+  useFetchUserQuery,
+  useMarkMovieAsFavoriteMutation,
+  useCheckMarkMovieQuery,
+  useAddMovieToListMutation,
+  useRemoveSessionMutation
+} = userApi
