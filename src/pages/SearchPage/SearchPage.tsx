@@ -6,6 +6,7 @@ import { Container, Grid } from "@mui/material";
 import CPagination from "../../components/CPagination/CPagination";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { ScrollToTop } from "../../helpers/scrollToTop";
 import './SearchPage.scss';
 
 interface SearchParams {
@@ -29,7 +30,8 @@ const SearchPage:React.FC = () => {
     setParams({
       ...params,
       page
-    })
+    });
+    ScrollToTop();
   }
 
   i18n.on('languageChanged', () => {
@@ -60,7 +62,11 @@ const SearchPage:React.FC = () => {
             })
           }
         </Grid>
-        <CPagination pageCount={resuts.data?.total_pages} defaultPage={1} handler={changePage} />
+        {
+          resuts.data?.total_pages && 
+          resuts.data?.total_pages > 0 &&
+          <CPagination pageCount={resuts.data?.total_pages} defaultPage={1} handler={changePage} />
+        }
       </Container>
     </div>
   )

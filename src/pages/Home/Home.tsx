@@ -4,6 +4,7 @@ import MoviesContainer from "../../containers/MoviesContainer";
 import { useState, useEffect } from "react";
 import CPagination from '../../components/CPagination/CPagination';
 import SortMovies from '../../components/SortMovies/SortMovies';
+import { ScrollToTop } from "../../helpers/scrollToTop";
 import { useTranslation } from 'react-i18next';
 
 interface SearchParams {
@@ -35,7 +36,8 @@ export default function Home() {
     setSortParams({
       ...sortParams,
       page: page
-    })
+    });
+    ScrollToTop();
   }
   const getFilters = (filters:Filters):void => {
     setSortParams({

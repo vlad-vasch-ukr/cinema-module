@@ -20,7 +20,7 @@ const UserPage:React.FC = () => {
             User Id: {user.data?.id}
           </Typography>
           <Typography mt={2}>
-            User UserName: {user.data?.username}
+            User Name: {user.data?.username}
           </Typography>
           <Typography mt={2}>
             User language: {user.data?.iso_639_1}

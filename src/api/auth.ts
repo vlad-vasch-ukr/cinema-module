@@ -27,12 +27,3 @@ export const generateSessionId = async (requestToken:string | null) => {
   localStorage.setItem('session_id', session_id.session_id);
   return session_id;
 };
-
-export const deleteSession = async (session_id:string) => {
-  const data = await authAxios.delete('/authentication/session', {
-    data: {
-      session_id,
-    },
-  });
-  return data;
-};

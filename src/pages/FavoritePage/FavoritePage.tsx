@@ -4,6 +4,7 @@ import { useFetchFavoriteMoviesQuery } from '../../services/MoviesService';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import CPagination from '../../components/CPagination/CPagination';
 import { useState, useEffect } from 'react';
+import { ScrollToTop } from '../../helpers/scrollToTop';
 import { useTranslation } from 'react-i18next';
 
 interface FavoriteMoviesParams {
@@ -39,7 +40,8 @@ const FavoritePage:React.FC = () => {
     setParams({
       ...params,
       page
-    })
+    });
+    ScrollToTop();
   }
 
   return(
