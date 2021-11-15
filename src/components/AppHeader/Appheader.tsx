@@ -22,7 +22,6 @@ const AppHeader: React.FC = () => {
 
   const exit = async () => {
     const res = await removeSession(session_id);
-    console.log(res)
     localStorage.removeItem('session_id')
     history.push('/sign-up');
     setOpenAccount(false);
