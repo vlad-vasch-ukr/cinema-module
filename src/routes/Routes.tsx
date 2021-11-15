@@ -29,9 +29,9 @@ export default function Routes() {
 
   return(
     <>
-      {routes.map(({ path, Component }) => (
+      {/* {routes.map(({ path, Component }) => (
         <Route key={path} exact path={path}>
-          {/* {({ match }) => (
+          {({ match }) => (
           <CSSTransition
             in={match != null}
             timeout={300}
@@ -43,11 +43,20 @@ export default function Routes() {
               <Component />
             </div>
           </CSSTransition>
-          )} */}
+          )}
           <Component />
         </Route>
       ))}
-      <Route component={ErrorPage} />
+      <Route component={ErrorPage} /> */}
+      <Route path="/" exact component={Home} />
+      <Route path="/movie/:id" component={MoviePage} />
+      <Route path="/registration" component={Registration} />
+      <Route path="/sign-up" component={SignUp} />
+      <Route path="/search" component={SearchPage} />
+      <Route path="/session" component={SessionPage} />
+      <Route path="/favorite" component={FavoritePage} />
+      <Route path="*" component={ErrorPage} />
+      
     </>
   );
 }

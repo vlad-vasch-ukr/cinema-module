@@ -14,7 +14,7 @@ const MoviesContainer: React.FC<Items> = ({ items }) => {
         items && items.map(item => {
           return (
             <Grid item xs={6} sm={4} md={4} key={item.id}>
-              <MovieCard item={item} />
+              <MovieCard item={item} options={true} />
             </Grid>
           )
         })

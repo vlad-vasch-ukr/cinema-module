@@ -31,8 +31,8 @@ const MoviePage:React.FC = () => {
   const keyWords = useFetchMovieKeyWordsQuery(id);
   const session_id = localStorage.getItem('session_id');
   const marked = useCheckMarkMovieQuery({session_id, id});
-  const [markMovieAsFavorite, {}] = useMarkMovieAsFavoriteMutation();
-  const [addMovieToList, {}] = useAddMovieToListMutation();
+  const [markMovieAsFavorite] = useMarkMovieAsFavoriteMutation();
+  const [addMovieToList] = useAddMovieToListMutation();
 
   const getGenres = ():string => {
     const genres = data?.genres.map(genre => genre.name);

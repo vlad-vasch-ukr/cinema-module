@@ -47,7 +47,7 @@ const FavoritePage:React.FC = () => {
             favorite.data?.results && favorite.data.results.map(movie => {
               return(
                 <Grid item xs={6} sm={4} md={3} key={movie.id}>
-                  <MovieCard item={movie} />
+                  <MovieCard item={movie} options={false} />
                 </Grid>
               )
             })

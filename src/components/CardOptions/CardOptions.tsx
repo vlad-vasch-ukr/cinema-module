@@ -11,8 +11,8 @@ interface Props {
 const CardOptions:React.FC<Props> = ({id}) => {
   const session_id = localStorage.getItem('session_id');
   const marked = useCheckMarkMovieQuery({session_id, id});
-  const [markMovieAsFavorite, {}] = useMarkMovieAsFavoriteMutation();
-  const [addMovieToList, {}] = useAddMovieToListMutation();
+  const [markMovieAsFavorite] = useMarkMovieAsFavoriteMutation();
+  const [addMovieToList] = useAddMovieToListMutation();
 
   const markMovie = async (e:React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
