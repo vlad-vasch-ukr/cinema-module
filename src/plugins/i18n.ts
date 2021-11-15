@@ -7,6 +7,7 @@ import { ru } from '../locales/ru';
 i18n.use(LanguageDetectorModule).use(initReactI18next).init({
   fallbackLng: 'en',
   debug: false,
+  lng: 'en',
   resources: {
     en: {
       translation: en,
