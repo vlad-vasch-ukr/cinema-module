@@ -11,7 +11,8 @@ interface Movies {
 interface SearchParams {
   with_original_language:string 
   page:number
-  sort_by:string
+  sort_by:string,
+  language: string
 }
 
 interface Genres {
@@ -45,6 +46,11 @@ interface FavoriteMoviesParams {
   page: number
 }
 
+interface General {
+  id: string
+  language: string
+}
+
 export const moviApi = createApi({
   reducerPath: 'moviApi',
   baseQuery: fetchBaseQuery({
@@ -76,35 +82,39 @@ export const moviApi = createApi({
         }
       })
     }),
-    fetchCurrentMovie: build.query<ICurrMovie, string>({
-      query: (id:string) => ({
+    fetchCurrentMovie: build.query<ICurrMovie, General>({
+      query: ({id, language}) => ({
         url: `/movie/${id}`,
         params: {
-          api_key: process.env.REACT_APP_API_KEY
+          api_key: process.env.REACT_APP_API_KEY,
+          language
         }
       })
     }),
-    fetchRecommendations: build.query<Recommendations, string>({
-      query: (id:string) => ({
+    fetchRecommendations: build.query<Recommendations, General>({
+      query: ({id, language}) => ({
         url: `/movie/${id}/recommendations`,
         params: {
-          api_key: process.env.REACT_APP_API_KEY
+          api_key: process.env.REACT_APP_API_KEY,
+          language
         }
       })
     }),
-    fetchMovieCredits: build.query<ICredits, string>({
-      query: (id:string) => ({
+    fetchMovieCredits: build.query<ICredits, General>({
+      query: ({id, language}) => ({
         url: `/movie/${id}/credits`,
         params: {
-          api_key: process.env.REACT_APP_API_KEY
+          api_key: process.env.REACT_APP_API_KEY,
+          language
         }
       })
     }),
-    fetchMovieKeyWords: build.query<KeyWords, string>({
-      query: (id:string) => ({
+    fetchMovieKeyWords: build.query<KeyWords, General>({
+      query: ({id, language}) => ({
         url: `/movie/${id}/keywords`,
         params: {
-          api_key: process.env.REACT_APP_API_KEY
+          api_key: process.env.REACT_APP_API_KEY,
+          language
         }
       })
     }),

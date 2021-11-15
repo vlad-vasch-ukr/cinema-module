@@ -4,7 +4,7 @@ import { useFetchSearchMoviesQuery } from "../../services/MoviesService";
 import SimpleMovieCard from "../../components/SimpleMovieCard/SimpleMovieCard";
 import { Container, Grid } from "@mui/material";
 import CPagination from "../../components/CPagination/CPagination";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import './SearchPage.scss';
 
@@ -38,6 +38,12 @@ const SearchPage:React.FC = () => {
       language: i18n.language
     })
   })
+
+  useEffect(() => {
+    return () => {
+      i18n.off('languageChanged')
+    }
+  }, [i18n])
 
   return(
     <div className="search-page">

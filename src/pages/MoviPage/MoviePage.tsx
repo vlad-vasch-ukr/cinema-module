@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
 import { useParams } from 'react-router';
+import { useState, useEffect } from 'react';
 import { 
   useFetchCurrentMovieQuery, 
   useFetchRecommendationsQuery, 
@@ -23,12 +24,13 @@ interface Params {
 }
 
 const MoviePage:React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState<string>(i18n.language);
   const { id } = useParams<Params>();
-  const { data } = useFetchCurrentMovieQuery(id);
-  const { data: results } = useFetchRecommendationsQuery(id);
-  const credits = useFetchMovieCreditsQuery(id);
-  const keyWords = useFetchMovieKeyWordsQuery(id);
+  const { data } = useFetchCurrentMovieQuery({id, language});
+  const { data: results } = useFetchRecommendationsQuery({id, language});
+  const credits = useFetchMovieCreditsQuery({id, language});
+  const keyWords = useFetchMovieKeyWordsQuery({id, language});
   const session_id = localStorage.getItem('session_id');
   const marked = useCheckMarkMovieQuery({session_id, id});
   const [markMovieAsFavorite] = useMarkMovieAsFavoriteMutation();
@@ -39,6 +41,14 @@ const MoviePage:React.FC = () => {
     if (genres) return genres?.join(', ');
     return ''
   }
+
+  i18n.on('languageChanged', () => setLanguage(i18n.language))
+
+  useEffect(() => {
+    return () => {
+      i18n.off('languageChanged')
+    }
+  }, [i18n])
 
   const getRunTime = ():string => {
     if (data?.runtime) {
@@ -146,7 +156,7 @@ const MoviePage:React.FC = () => {
                   }}
                   onClick={markMovie}
                 >
-                  <FavoriteIcon sx={{color: marked.data?.favorite ? '#f30000' : '#000'}} />
+                  <FavoriteIcon sx={{color: marked.data?.favorite ? '#f30000' : '#fff'}} />
                 </Box>
                 <Box
                   sx={{bgcolor: 'primary.dark',
@@ -160,7 +170,7 @@ const MoviePage:React.FC = () => {
                   }}
                   onClick={markList}
                 >
-                  <ListAltIcon sx={{color: marked.data?.watchlist ? '#f30000' : '#000'}} />
+                  <ListAltIcon sx={{color: marked.data?.watchlist ? '#f30000' : '#fff'}} />
                 </Box>
               </Box>
               <Typography component='p' sx={{ fontWeight: 600, fontSize: '22px' }}>

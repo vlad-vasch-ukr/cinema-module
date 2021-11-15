@@ -3,7 +3,7 @@ import { Container, Typography, Grid } from '@mui/material';
 import { useFetchFavoriteMoviesQuery } from '../../services/MoviesService';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import CPagination from '../../components/CPagination/CPagination';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface FavoriteMoviesParams {
@@ -28,6 +28,12 @@ const FavoritePage:React.FC = () => {
       language: i18n.language
     })
   })
+
+  useEffect(() => {
+    return () => {
+      i18n.off('languageChanged')
+    }
+  }, [i18n])
 
   const changePage = (page:number):void => {
     setParams({

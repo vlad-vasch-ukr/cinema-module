@@ -1,7 +1,7 @@
 import { useFetchMoviesQuery, useFetchMovieCategoriesQuery, useFetchLanguagesQuery } from "../../services/MoviesService";
 import { Container, Box, Typography } from "@mui/material";
 import MoviesContainer from "../../containers/MoviesContainer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CPagination from '../../components/CPagination/CPagination';
 import SortMovies from '../../components/SortMovies/SortMovies';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ interface SearchParams {
   page:number
   sort_by:string
   with_genres: string,
+  language: string
 }
 
 interface Filters {
@@ -19,12 +20,13 @@ interface Filters {
 }
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [sortParams, setSortParams] = useState<SearchParams>({
     page: 1, 
     sort_by: 'popularity.desc',
     with_genres: '',
-    with_original_language: 'en'
+    with_original_language: 'en',
+    language: i18n.language
   })
   const {data: results} = useFetchMoviesQuery(sortParams);
   const {data: genres} = useFetchMovieCategoriesQuery('');
@@ -42,6 +44,21 @@ export default function Home() {
       with_original_language: filters.with_original_language
     })
   }
+
+  const changeLang = ():void => {
+    setSortParams({
+      ...sortParams,
+      language: i18n.language
+    })
+  }
+
+  i18n.on('languageChanged', changeLang)
+
+  useEffect(() => {
+    return () => {
+      i18n.off('languageChanged')
+    }
+  }, [i18n])
 
   return (
     <Box sx={{ paddingBottom: '100px' }}>
